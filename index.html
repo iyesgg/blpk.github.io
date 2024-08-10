@@ -128,6 +128,16 @@
                                     </div>
                                 </td>
                             </tr>
+                             <tr>
+                                <td>超极巨(剑盾)</td>
+                                <td>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" id="Gigantamax">
+                                        </label>
+                                    </div>
+                                </td>
+                            </tr>
                                 <td>球种</td>
                                 <td>
                                     <select id="ball" class="selectpicker" data-live-search="true" data-width="auto">
@@ -818,6 +828,9 @@
             if ($("#Ribbons").prop('checked')) {
                 text += ".Ribbons=$suggestAll\n";
             }
+            if ($("#Gigantamax").prop('checked')) {
+                text += "Gigantamax: Yes\n";
+            }
             if ($("#power").prop('checked')) {
                 text += ".RibbonMarkMightiest=True\n";
             }
@@ -935,6 +948,9 @@
             }
             if ($("#Ribbons").prop('checked')) {
                 text += ".Ribbons=$suggestAll\n";
+            }
+            if ($("#Gigantamax").prop('checked')) {
+                text += "Gigantamax: Yes\n";
             }
             if ($("#Friend").prop('checked')) {
                 text += ".OT_Friendship=255\n";
