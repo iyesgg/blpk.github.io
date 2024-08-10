@@ -516,6 +516,15 @@
                                         </label>
                                     </div>
                                 </td>
+                            <tr>
+                                <td>随机招式</td>
+                                <td>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" id="Movesmax">
+                                        </label>
+                                    </div>
+                                </td>
                         </tbody>
                     </table>
                 </div>
@@ -818,6 +827,9 @@
             if ($("#Movesup").prop('checked')) {
                 text += ".Move1_PPUps=3\n.Move2_PPUps=3\n.Move3_PPUps=3\n.Move4_PPUps=3\n";
             }
+            if ($("#Movesmax").prop('checked')) {
+                text += ".Moves=$suggest\n";
+            }
             if ($("#Movesup1").prop('checked')) {
                 text += ".Move1_PPUps=3\n";
             }
@@ -929,6 +941,9 @@
             }
             if ($("#Movesup").prop('checked')) {
                 text += ".Move1_PPUps=3\n.Move2_PPUps=3\n.Move3_PPUps=3\n.Move4_PPUps=3\n";
+            }
+            if ($("#Movesmax").prop('checked')) {
+                text += ".Moves=$suggest\n";
             }
             if ($("#Movesup1").prop('checked')) {
                 text += ".Move1_PPUps=3\n";
