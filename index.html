@@ -104,7 +104,17 @@
                                 <td>
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" id="isShiny">⚠️部分神兽和特定宝可梦锁闪⚠️
+                                            <input type="checkbox" id="isShiny">
+                                        </label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>方块闪</td>
+                                <td>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" id="isShiny1">
                                         </label>
                                     </div>
                                 </td>
@@ -319,7 +329,7 @@
                                     <div class="form-group">
                                         <input id="scale" type="number" class="form-control" id="level"
                                             placeholder="0-255" onchange="checkNum(this, 0, 255, 128)"
-                                            style="width: 6em;">⚠️部分神兽和特定宝可梦锁体型128⚠️
+                                            style="width: 6em;">
                                     </div>
                                 </td>
                             </tr>
@@ -822,6 +832,9 @@
             if ($("#isShiny").prop('checked')) {
                 text += "Shiny: Yes\n";
             }
+            if ($("#isShiny1").prop('checked')) {
+                text += ".PID=$Shiny0\n";
+            }
             if ($("#allMove").prop('checked')) {
                 text += ".RelearnMoves=$suggestAll\n";
             }
@@ -942,6 +955,9 @@
             }
             if ($("#isShiny").prop('checked')) {
                 text += "Shiny: Yes\n";
+            }
+            if ($("#isShiny1").prop('checked')) {
+                text += ".PID=$Shiny0\n";
             }
             if ($("#allMove").prop('checked')) {
                 text += ".RelearnMoves=$suggestAll\n";
