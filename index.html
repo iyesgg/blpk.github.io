@@ -829,20 +829,6 @@
             if (level != null && level > 0 && level <= 100) {
                 text += "Level: " + level + "\n";
             }
-            var chu = $("#chu").val();
-            text += "OT: " + chu + "\n";{
-            }
-            var biao = $("#biao").val();
-            if (biao != null && biao > 0 && biao <= 9999999) {
-                text += ".DisplayTID= " + biao + "\n";
-            }
-            var li = $("#li").val();
-            if (li != null && biao > 0 && li <= 9999999) {
-                text += ".DisplaySID= " + li + "\n";
-            }
-            if ($("#isShiny").prop('checked')) {
-                text += "Shiny: Yes\n";
-            }
             if ($("#isShiny1").prop('checked')) {
                 text += ".PID=$Shiny0\n";
             }
@@ -966,17 +952,6 @@
             var level = $("#level").val();
             if (level != null && level > 0 && level <= 100) {
                 text += "Level: " + level + "\n";
-            }
-            var chu = $("#chu").val();
-            text += "OT: " + chu + "\n";{
-            }
-            var biao = $("#biao").val();
-            if (biao != null && biao > 0 && biao <= 9999999) {
-                text += ".DisplayTID= " + biao + "\n";
-            }
-            var li = $("#li").val();
-            if (li != null && biao > 0 && li <= 9999999) {
-                text += ".DisplaySID= " + li + "\n";
             }
             if ($("#isShiny").prop('checked')) {
                 text += "Shiny: Yes\n";
