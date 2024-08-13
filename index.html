@@ -600,6 +600,16 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td>剑盾巢穴神兽闪</td>
+                                <td>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" id="isShiny2">
+                                        </label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
                                 <td></td>
                             </tr>
                         </tbody>
@@ -883,6 +893,9 @@
             if ($("#isShiny1").prop('checked')) {
                 text += ".PID=$Shiny0\n";
             }
+            if ($("#isShiny2").prop('checked')) {
+                text += ".PID=$Shiny1\n";
+            }
             if ($("#allMove").prop('checked')) {
                 text += ".RelearnMoves=$suggestAll\n";
             }
@@ -1017,6 +1030,9 @@
             }
             if ($("#isShiny1").prop('checked')) {
                 text += ".PID=$Shiny0\n";
+            }
+            if ($("#isShiny2").prop('checked')) {
+                text += ".PID=$Shiny1\n";
             }
             if ($("#allMove").prop('checked')) {
                 text += ".RelearnMoves=$suggestAll\n";
