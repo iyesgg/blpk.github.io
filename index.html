@@ -829,6 +829,9 @@
             if (level != null && level > 0 && level <= 100) {
                 text += "Level: " + level + "\n";
             }
+             if ($("#isShiny").prop('checked')) {
+                text += "Shiny: Yes\n";
+            }
             if ($("#isShiny1").prop('checked')) {
                 text += ".PID=$Shiny0\n";
             }
