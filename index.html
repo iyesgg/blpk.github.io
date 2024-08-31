@@ -49,6 +49,7 @@
                         data-toggle="tab">宝可梦基础信息</a></li>
                 <li role="presentation"><a href="#ivev" aria-controls="ivev" role="tab" data-toggle="tab">努力值调整</a></li>
                 <li role="presentation"><a href="#moves" aria-controls="moves" role="tab" data-toggle="tab">招式选择</a></li>
+                <li role="presentation"><a href="#tidsid" aria-controls="batch" role="tab" data-toggle="tab">初训家资料</a></li>
                 <li role="presentation"><a href="#batch" aria-controls="batch" role="tab" data-toggle="tab">批量队伍</a></li>
             </ul>
 
@@ -555,6 +556,41 @@
                                         </label>
                                     </div>
                                 </td>
+                          </tbody>
+                    </table>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="tidsid">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td>初训家</td>
+                                <td>
+                                    <div class="form-group">
+                                        <label>
+                                        <input type="form-group"  id="chu" placeholder="初训家名字"
+                                              style="width: 10em;">
+                                        <label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>里ID</td>
+                                <td>
+                                    <div class="form-group">
+                                        <input type="number" class="form-control" id="li" placeholder="里ID4位"
+                                             style="width: 10em;">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>表ID</td>
+                                <td>
+                                    <div class="form-group">
+                                        <input type="number" class="form-control" id="biao" placeholder="表ID6位"
+                                             style="width: 10em;">
+                                    </div>
+                                </td>
+                            </tr>        
                         </tbody>
                     </table>
                 </div>
@@ -839,6 +875,18 @@
             if (level != null && level > 0 && level <= 100) {
                 text += "Level: " + level + "\n";
             }
+            var chu = $("#chu").val();
+            if (chu != null && chu ) {
+            text += "OT: " + chu + "\n";
+            }
+            var biao = $("#biao").val();
+            if (biao != null && biao) {
+                text += ".DisplayTID= " + biao + "\n";
+            }
+            var li = $("#li").val();
+            if (li != null && biao) {
+                text += ".DisplaySID= " + li + "\n";
+            }     
              if ($("#isShiny").prop('checked')) {
                 text += "Shiny: Yes\n";
             }
@@ -965,6 +1013,18 @@
             var level = $("#level").val();
             if (level != null && level > 0 && level <= 100) {
                 text += "Level: " + level + "\n";
+            }
+            var chu = $("#chu").val();
+            if (chu != null && chu ) {
+            text += "OT: " + chu + "\n";
+            }
+            var biao = $("#biao").val();
+            if (biao != null && biao) {
+                text += ".DisplayTID= " + biao + "\n";
+            }
+            var li = $("#li").val();
+            if (li != null && biao) {
+                text += ".DisplaySID= " + li + "\n";
             }
             if ($("#isShiny").prop('checked')) {
                 text += "Shiny: Yes\n";
