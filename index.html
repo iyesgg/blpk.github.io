@@ -590,7 +590,23 @@
                                              style="width: 10em;">
                                     </div>
                                 </td>
-                            </tr>        
+                            </tr> 
+                             <tr>
+                                <td>⚠️特别说明:自己填自ID的情况下普通闪光的选项会失效,此自ID建议在剑盾版本的方块闪模式下配合使用否则请慎重使用</td>
+                            </tr>
+                            <tr>
+                                <td>⚠️如需配合使用普通闪光模式的可以勾选下面的特殊闪光选项</td>
+                            </tr>
+                            <tr>
+                                <td>配合自ID普通闪</td>
+                                <td>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" id="isShiny3">
+                                        </label>
+                                    </div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -896,6 +912,9 @@
             if ($("#isShiny2").prop('checked')) {
                 text += ".PID=$Shiny1\n";
             }
+            if ($("#isShiny3").prop('checked')) {
+                text += ".PID=$Shiny\n";
+            }
             if ($("#allMove").prop('checked')) {
                 text += ".RelearnMoves=$suggestAll\n";
             }
@@ -1034,6 +1053,9 @@
             }
             if ($("#isShiny2").prop('checked')) {
                 text += ".PID=$Shiny1\n";
+            }
+            if ($("#isShiny3").prop('checked')) {
+                text += ".PID=$Shiny\n";
             }
             if ($("#allMove").prop('checked')) {
                 text += ".RelearnMoves=$suggestAll\n";
