@@ -111,6 +111,16 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td>蛋</td>
+                                <td>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" id="species1">
+                                        </label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
                                 <td>方块闪</td>
                                 <td>
                                     <div class="checkbox">
@@ -873,8 +883,10 @@
         function exportPS() {
             var text = "";
             var species = $("#species").val();
+            if ($("#species1").prop('checked')) { text += "Egg("; }
             text += species;
             var gender = $("#gender").val();
+            if ($("#species1").prop('checked')) { text += ")"; }
             if (gender == "female" && (species == "Meowstic" || species == "Indeedee" || species == "Basculegion " || species == "Oinkologne")) {
                 species += "-F";
             }
@@ -1015,8 +1027,10 @@
             psnum++;
             var text = "";
             var species = $("#species").val();
+            if ($("#species1").prop('checked')) { text += "Egg("; }
             text += species;
             var gender = $("#gender").val();
+            if ($("#species1").prop('checked')) { text += ")"; }
             if (gender == "female" && (species == "Meowstic" || species == "Indeedee" || species == "Basculegion " || species == "Oinkologne")) {
                 species += "-F";
             }
