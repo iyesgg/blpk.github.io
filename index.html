@@ -1,49 +1,37 @@
 <!doctype html>
 <html lang="zh-CN">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>宝可梦定制助手(小黑版)</title>
-
-    <!-- Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css"
         integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.18/dist/css/bootstrap-select.min.css">
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
       <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
     <![endif]-->
 </head>
-
 <body>
     <nav class="navbar navbar-default">
         <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <a class="navbar-brand" href="https://space.bilibili.com/1777419989">
                     定制助手 <span style="font-size: small;">Fix-by <span style="text-decoration: underline;">B站乌漆麻黑h</span></span>
                 </a>
-                <button id="exportPS" type="button" class="btn btn-default navbar-btn" onclick="exportPS()" data-toggle="popover" data-placement="left" data-content="黏贴发送" 
+                <button id="exportPS" type="button" class="btn btn-primary navbar-btn" onclick="exportPS()" data-toggle="popover" data-placement="left" data-content="黏贴发送" 
                     style="position: absolute; right: 0;margin-right: 8px;">导出</button>
-                </button>
-                <button id="batchPS" type="button" class="btn btn-default navbar-btn" onclick="batchPS()" data-toggle="popover" data-placement="left" data-content="已添加"
+                <button id="batchPS" type="button" class="btn btn-primary navbar-btn" onclick="batchPS()" data-toggle="popover" data-placement="left" data-content="已添加"
                         style="position: absolute; right: 75px; margin-right: 8px;">
                     批量添加
                 </button>
             </div>
-
-        </div><!-- /.container-fluid -->
+        </div>
     </nav>
     <div class="container">
         <div>
-            <!-- Nav tabs -->
             <ul class="nav nav-tabs" role="tablist">
                 <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab"
                         data-toggle="tab">宝可梦基础信息</a></li>
@@ -51,8 +39,6 @@
                 <li role="presentation"><a href="#moves" aria-controls="moves" role="tab" data-toggle="tab">招式选择</a></li>
                 <li role="presentation"><a href="#batch" aria-controls="batch" role="tab" data-toggle="tab">批量队伍</a></li>
             </ul>
-
-            <!-- Tab panes -->
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="home">
                     <table class="table">
@@ -81,7 +67,7 @@
                                     </select>
                                 </td>
                             </tr>
-                            <tr>
+                            <tr id="heldItemRow">
                                 <td>道具</td>
                                 <td>
                                     <select id="heldItem" class="selectpicker" data-live-search="true"
@@ -148,6 +134,7 @@
                                         </label>
                                     </div>
                                 </td>
+                            </tr>
                             <tr>
                                 <td>全合法缎带(奖章)</td>
                                 <td>
@@ -168,40 +155,41 @@
                                     </div>
                                 </td>
                             </tr>
+                            <tr>
                                 <td>球种</td>
                                 <td>
                                     <select id="ball" class="selectpicker" data-live-search="true" data-width="auto">
-                                        <option value='None'>默认</optional>
-                                        <option value='Master Ball'>大师球</optional>
-                                        <option value='Ultra Ball'>高级球</optional>
-                                        <option value='Great Ball'>超级球</optional>
-                                        <option value='Poké Ball'>精灵球</optional>
-                                        <option value='Safari Ball'>狩猎球</optional>
-                                        <option value='Net Ball'>捕网球</optional>
-                                        <option value='Dive Ball'>潜水球</optional>
-                                        <option value='Nest Ball'>巢穴球</optional>
-                                        <option value='Repeat Ball'>重复球</optional>
-                                        <option value='Timer Ball'>计时球</optional>
-                                        <option value='Luxury Ball'>豪华球</optional>
-                                        <option value='Premier Ball'>纪念球</optional>
-                                        <option value='Dusk Ball'>黑暗球</optional>
-                                        <option value='Heal Ball'>治愈球</optional>
-                                        <option value='Quick Ball'>先机球</optional>
-                                        <option value='Cherish Ball'>贵重球</optional>
-                                        <option value='Fast Ball'>速度球</optional>
-                                        <option value='Level Ball'>等级球</optional>
-                                        <option value='Lure Ball'>诱饵球</optional>
-                                        <option value='Heavy Ball'>沉重球</optional>
-                                        <option value='Love Ball'>甜蜜球</optional>
-                                        <option value='Friend Ball'>友友球</optional>
-                                        <option value='Moon Ball'>月亮球</optional>
-                                        <option value='Sport Ball'>竞赛球</optional>
-                                        <option value='Dream Ball'>梦境球</optional>
-                                        <option value='Beast Ball'>究极球</optional>
+                                        <option value='None'>默认</option>
+                                        <option value='Master Ball'>大师球</option>
+                                        <option value='Ultra Ball'>高级球</option>
+                                        <option value='Great Ball'>超级球</option>
+                                        <option value='Poké Ball'>精灵球</option>
+                                        <option value='Safari Ball'>狩猎球</option>
+                                        <option value='Net Ball'>捕网球</option>
+                                        <option value='Dive Ball'>潜水球</option>
+                                        <option value='Nest Ball'>巢穴球</option>
+                                        <option value='Repeat Ball'>重复球</option>
+                                        <option value='Timer Ball'>计时球</option>
+                                        <option value='Luxury Ball'>豪华球</option>
+                                        <option value='Premier Ball'>纪念球</option>
+                                        <option value='Dusk Ball'>黑暗球</option>
+                                        <option value='Heal Ball'>治愈球</option>
+                                        <option value='Quick Ball'>先机球</option>
+                                        <option value='Cherish Ball'>贵重球</option>
+                                        <option value='Fast Ball'>速度球</option>
+                                        <option value='Level Ball'>等级球</option>
+                                        <option value='Lure Ball'>诱饵球</option>
+                                        <option value='Heavy Ball'>沉重球</option>
+                                        <option value='Love Ball'>甜蜜球</option>
+                                        <option value='Friend Ball'>友友球</option>
+                                        <option value='Moon Ball'>月亮球</option>
+                                        <option value='Sport Ball'>竞赛球</option>
+                                        <option value='Dream Ball'>梦境球</option>
+                                        <option value='Beast Ball'>究极球</option>
                                     </select>
                                 </td>
                             </tr>
-                            </tr>
+                            <tr>
                                 <td>野外之证</td>
                                 <td>
 <select id="ribbons" class="selectpicker" data-width="auto" multiple="true">
@@ -390,7 +378,6 @@
                                             style="width: 4em; display: inline;" value="31" onchange="checkNum(this, 0, 31, 31)">
                                         <input class="btn btn-info" type="button" value="最小" onclick="toNumberIV(this)">
                                     </div>
-
                                 </td>
                                 <td class="ev">
                                     <div class="form-group form-inline">
@@ -409,7 +396,6 @@
                                             style="width: 4em; display: inline;" value="31" onchange="checkNum(this, 0, 31, 31)">
                                         <input class="btn btn-info" type="button" value="最小" onclick="toNumberIV(this)">
                                     </div>
-
                                 </td>
                                 <td class="ev">
                                     <div class="form-group form-inline">
@@ -428,7 +414,6 @@
                                             style="width: 4em; display: inline;" value="31" onchange="checkNum(this, 0, 31, 31)">
                                         <input class="btn btn-info" type="button" value="最小" onclick="toNumberIV(this)">
                                     </div>
-
                                 </td>
                                 <td class="ev">
                                     <div class="form-group form-inline">
@@ -447,7 +432,6 @@
                                             style="width: 4em; display: inline;" value="31" onchange="checkNum(this, 0, 31, 31)">
                                         <input class="btn btn-info" type="button" value="最小" onclick="toNumberIV(this)">
                                     </div>
-
                                 </td>
                                 <td class="ev">
                                     <div class="form-group form-inline">
@@ -466,7 +450,6 @@
                                             style="width: 4em; display: inline;" value="31" onchange="checkNum(this, 0, 31, 31)">
                                         <input class="btn btn-info" type="button" value="最小" onclick="toNumberIV(this)">
                                     </div>
-
                                 </td>
                                 <td class="ev">
                                     <div class="form-group form-inline">
@@ -556,6 +539,7 @@
                                         </label>
                                     </div>
                                 </td>
+                            </tr>
                             <tr>
                                 <td>随机招式</td>
                                 <td>
@@ -565,6 +549,7 @@
                                         </label>
                                     </div>
                                 </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -642,16 +627,12 @@
                         </tbody>
                     </table>
                 </div>
-                </div>
             </div>
         </div>
     </div>
-
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"
         integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ"
         crossorigin="anonymous"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js"
         integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
         crossorigin="anonymous"></script>
@@ -684,12 +665,18 @@
             $("#ball").change(function () {
                 refresh();
             });
+            $("#species1").change(function() {
+                if ($(this).prop('checked')) {
+                    $("#heldItemRow").hide();
+                } else {
+                    $("#heldItemRow").show();
+                }
+            });
         });
+
         function changeImage(species) {
             var selectElement = document.getElementById("species");
             var imageElement = document.getElementById("speciesImage");
-            //var selectedOption = selectElement.options[selectElement.selectedIndex];
-            //var imageSrc = selectedOption.getAttribute("data-image");
             var imageSrc = pk_species[species][4];
             if ($("#isShiny").prop('checked')) {
                 imageSrc += "_r";
@@ -699,10 +686,10 @@
             }
             imageElement.src = "img/Spritesimg/" + imageSrc + ".png";
         }
+
         function updateBorderColor() {
             var borderColor;
             var ballcolor = $("#ball").val();
-            // 这里根据不同的数据值设置不同的边框颜色
             switch (ballcolor) {
                 case "None":
                 borderColor = "rgb(226,88,62)";
@@ -833,6 +820,7 @@
             refreshMove($("#move3"), species);
             refreshMove($("#move4"), species);
         }
+        
         function refreshMove($move, species) {
             $move.empty();
             var moveIndexs = pk_species[species][3];
@@ -842,6 +830,7 @@
             }
             $move.selectpicker('refresh');
         }
+        
         function checkNum(o, start, end, defaultValue) {
             var $o = $(o);
             var value = $o.val();
@@ -849,6 +838,7 @@
                 $o.val(defaultValue);
             }
         }
+        
         function toNumberIV(o) {
             var $o = $(o);
             var $prev = $o.prev();
@@ -860,6 +850,7 @@
                 $prev.val(0);
             }
         }
+        
         function toNumberEV(o) {
             var $o = $(o);
             if ($o.val() == "最小") {
@@ -883,6 +874,7 @@
                 $o.val("最小");
             }
         }
+        
         function exportPS() {
             var text = "";
             var species = $("#species").val();
@@ -896,7 +888,7 @@
             if (gender == "male") text += " (M)";
             else if (gender == "female") text += " (F)";
             var heldItem = $("#heldItem").val();
-            if (heldItem != "None") {
+            if (heldItem != "None" && !$("#species1").prop('checked')) {
                 text += " @ " + heldItem + "\n";
             } else {
                 text += "\n";
@@ -1026,8 +1018,8 @@ if (ribbons && ribbons.length > 0) {
             setTimeout(function(){$("#exportPS").popover("hide");}, 2000);
             console.log(text);
         }
+        
         var psnum = 0;
-        //批量添加宝可梦
         function batchPS() {
             psnum++;
             var text = "";
@@ -1042,7 +1034,7 @@ if (ribbons && ribbons.length > 0) {
             if (gender == "male") text += " (M)";
             else if (gender == "female") text += " (F)";
             var heldItem = $("#heldItem").val();
-            if (heldItem != "None") {
+            if (heldItem != "None" && !$("#species1").prop('checked')) {
                 text += " @ " + heldItem + "\n<br>";
             } else {
                 text += "\n<br>";
@@ -1171,10 +1163,11 @@ if (ribbons && ribbons.length > 0) {
             document.getElementById("psVariable").textContent = psnum;
             console.log(text);
         }
+        
         function exportbatchPS() {
             var ps = "";
             $(".table h5").each(function () {
-                ps += $(this).text().trim() + " " + "\n\n"; // 获取每个<h5>元素的文本内容并添加到ps变量中
+                ps += $(this).text().trim() + " " + "\n\n";
             });
             
             if (psnum == 0) {
@@ -1188,6 +1181,7 @@ if (ribbons && ribbons.length > 0) {
                 console.log(ps);
             }
         }
+        
         function clearbatchPS() {
             if (psnum == 0) {
                 showPopover($(".btn.btn-infos2"), "尚未添加宝可梦进入批量列表");
@@ -1199,15 +1193,13 @@ if (ribbons && ribbons.length > 0) {
                 $(".table h5").empty();
             }
         }
+        
         function clearfinalPS() {
             if (psnum == 0) {
                 showPopover($(".btn.btn-infos3"), "尚未添加宝可梦进入批量列表");
             }
             else {
-                // 找到所有的 <h5> 元素
                 var h5Elements = document.querySelectorAll('#batch .table h5');
-
-                // 如果存在要清除的元素，则移除最后一个 <h5> 元素
                 if (h5Elements.length > 0) {
                     h5Elements[h5Elements.length - 1].remove();
                     psnum--;
@@ -1216,12 +1208,12 @@ if (ribbons && ribbons.length > 0) {
                 }
             }
         }
+        
         function showPopover(target, msg) {
             target.attr("data-original-title", msg);
             $('[data-toggle="tooltip"]').tooltip();
             target.tooltip('show');
             target.focus();
-            //2秒后消失提示框
             var id = setTimeout(
                 function () {
                     target.attr("data-original-title", "");
@@ -1231,5 +1223,4 @@ if (ribbons && ribbons.length > 0) {
         }
     </script>
 </body>
-
 </html>
