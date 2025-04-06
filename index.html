@@ -9,6 +9,122 @@
         integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.18/dist/css/bootstrap-select.min.css">
+    <!-- 引入 Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+    <!-- 引入 Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* 美化导航栏标题 */
+        .navbar-brand {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 24px;
+            color: #ff6f61;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .navbar-brand:hover {
+            transform: scale(1.05);
+            color: #ffcb05; /* 悬停时变为黄色 */
+        }
+        /* 动态效果：添加下划线动画 */
+        .navbar-brand::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: #3b4cca; /* 蓝色下划线 */
+            transition: width 0.3s ease;
+        }
+        .navbar-brand:hover::after {
+            width: 100%; /* 悬停时下划线扩展 */
+        }
+        .navbar-brand small {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            color: #3b4cca;
+        }
+        .navbar-brand small span {
+            text-decoration: underline;
+            color: #ffcb05;
+        }
+
+        /* 美化按钮样式 */
+        .navbar-btn.custom-btn {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 18px;
+            font-weight: bold;
+            color: #fff;
+            background-color: #3b4cca; /* 纯蓝色背景 */
+            border: 2px solid #ff6f61; /* 珊瑚红边框 */
+            border-radius: 12px;
+            padding: 6px 12px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* 悬停效果 */
+        .navbar-btn.custom-btn:hover {
+            transform: scale(1.1);
+            background-color: #ffcb05; /* 悬停时变为黄色 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            color: #3b4cca; /* 文字变为蓝色 */
+        }
+
+        /* 图标样式 */
+        .custom-btn i {
+            font-size: 16px;
+            transition: transform 0.3s ease;
+        }
+
+        /* 悬停时图标旋转 */
+        .custom-btn:hover i {
+            transform: rotate(360deg);
+        }
+
+        /* 调整按钮位置，增加间隔 */
+        #exportPS {
+            position: absolute;
+            right: 0;
+            margin-right: 16px; /* 增加右边距 */
+        }
+
+        #batchPS {
+            position: absolute;
+            right: 100px; /* 增加与“导出”按钮的间隔 */
+            margin-right: 16px;
+        }
+
+        /* 美化 Popover 提示文字 */
+        .popover {
+            background-color: #ffcb05; /* 黄色背景 */
+            border: 2px solid #3b4cca; /* 蓝色边框 */
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        }
+        .popover-content {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 16px;
+            color: #3b4cca; /* 蓝色文字 */
+            padding: 5px 10px;
+            animation: fadeIn 0.5s ease; /* 淡入效果 */
+        }
+        /* 动态效果：淡入动画 */
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        /* Popover 箭头样式 */
+        .popover.left > .arrow {
+            border-left-color: #3b4cca; /* 箭头颜色与边框一致 */
+        }
+    </style>
     <!--[if lt IE 9]>
       <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
@@ -18,14 +134,14 @@
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href=" https://v.douyin.com/baQ7Iwra2fE/ 8@8.com :1pm">
+                <a class="navbar-brand" href="https://v.douyin.com/baQ7Iwra2fE/ 8@8.com :1pm">
                     定制助手 <span style="font-size: small;">Fix-by <span style="text-decoration: underline;">抖音小黑</span></span>
                 </a>
-                <button id="exportPS" type="button" class="btn btn-primary navbar-btn" onclick="exportPS()" data-toggle="popover" data-placement="left" data-content="黏贴发送" 
-                    style="position: absolute; right: 0;margin-right: 8px;">导出</button>
-                <button id="batchPS" type="button" class="btn btn-primary navbar-btn" onclick="batchPS()" data-toggle="popover" data-placement="left" data-content="已添加"
-                        style="position: absolute; right: 75px; margin-right: 8px;">
-                    批量添加
+                <button id="exportPS" type="button" class="btn btn-primary navbar-btn custom-btn" onclick="exportPS()" data-toggle="popover" data-placement="left" data-content="黏贴发送">
+                    <i class="fas fa-download"></i> 导出
+                </button>
+                <button id="batchPS" type="button" class="btn btn-primary navbar-btn custom-btn" onclick="batchPS()" data-toggle="popover" data-placement="left" data-content="已添加">
+                    <i class="fas fa-plus"></i> 批量添加
                 </button>
             </div>
         </div>
