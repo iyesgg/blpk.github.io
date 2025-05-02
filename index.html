@@ -9,13 +9,10 @@
         integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.18/dist/css/bootstrap-select.min.css">
-    <!-- 引入 Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
-    <!-- 引入 Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
         integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
-        /* 美化导航栏标题 */
         .navbar-brand {
             font-family: 'Ma Shan Zheng', cursive;
             font-size: 24px;
@@ -50,57 +47,44 @@
             text-decoration: underline;
             color: #ffcb05;
         }
-
-        /* 美化按钮样式（缩小尺寸） */
         .navbar-btn.custom-btn {
             font-family: 'Ma Shan Zheng', cursive;
-            font-size: 16px; /* 减小字体 */
+            font-size: 16px;
             font-weight: bold;
             color: #fff;
             background-color: #3b4cca;
             border: 2px solid #ff6f61;
-            border-radius: 10px; /* 略减小圆角 */
-            padding: 4px 8px; /* 减少内边距 */
+            border-radius: 10px;
+            padding: 4px 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
-            gap: 4px; /* 减小图标与文字间距 */
+            gap: 4px;
         }
-
-        /* 悬停效果 */
         .navbar-btn.custom-btn:hover {
             transform: scale(1.1);
             background-color: #ffcb05;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             color: #3b4cca;
         }
-
-        /* 图标样式 */
         .custom-btn i {
-            font-size: 14px; /* 减小图标 */
+            font-size: 14px;
             transition: transform 0.3s ease;
         }
-
-        /* 悬停时图标旋转 */
-        .custom-btn:hover i стучит {
+        .custom-btn:hover i {
             transform: rotate(360deg);
         }
-
-        /* 调整按钮位置 */
         #exportPS {
             position: absolute;
             right: 0;
             margin-right: 16px;
         }
-
         #batchPS {
             position: absolute;
-            right: 90px; /* 略减小间隔，但仍保持清晰分隔 */
+            right: 90px;
             margin-right: 16px;
         }
-
-        /* 美化 Popover 提示文字 */
         .popover {
             background-color: #ffcb05;
             border: 2px solid #3b4cca;
@@ -121,21 +105,19 @@
         .popover.left > .arrow {
             border-left-color: #3b4cca;
         }
-
-        /* 响应式调整（手机屏幕） */
         @media (max-width: 768px) {
             .navbar-brand {
-                font-size: 20px; /* 减小标题字体 */
+                font-size: 20px;
             }
             .navbar-btn.custom-btn {
-                font-size: 14px; /* 进一步减小按钮字体 */
-                padding: 3px 6px; /* 更紧凑的内边距 */
+                font-size: 14px;
+                padding: 3px 6px;
             }
             .custom-btn i {
-                font-size: 12px; /* 减小图标 */
+                font-size: 12px;
             }
             #batchPS {
-                right: 80px; /* 手机上略减小间隔 */
+                right: 80px;
             }
         }
     </style>
@@ -161,311 +143,307 @@
         </div>
     </nav>
     <div class="container">
-        <div>
-            <ul class="nav nav-tabs" role="tablist">
-                <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab"
-                        data-toggle="tab">宝可梦基础信息</a></li>
-                <li role="presentation"><a href="#ivev" aria-controls="ivev" role="tab" data-toggle="tab">努力值调整</a></li>
-                <li role="presentation"><a href="#moves" aria-controls="moves" role="tab" data-toggle="tab">招式选择</a></li>
-                <li role="presentation"><a href="#batch" aria-controls="batch" role="tab" data-toggle="tab">批量队伍</a></li>
-            </ul>
-            <div class="tab-content">
-                <div role="tabpanel" class="tab-pane active" id="home">
-                    <table class="table">
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <div id="imageContainer" style="border: 2px solid rgb(50, 124, 252); border-radius: 47%; padding: 5px; display: inline-block; overflow: hidden; border-width: 4px; margin-top: 4px;">
-                                        <img id="speciesImage" src="img/Spritesimg/_n.png" alt="图片描述" width="40" height="40">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div style="margin-top: 15px;">
+        <div id="error-message" style="display: none; color: red; margin-bottom: 10px;">
+            错误：无法加载宝可梦数据，请检查网络连接或脚本文件。
+        </div>
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">宝可梦基础信息</a></li>
+            <li role="presentation"><a href="#ivev" aria-controls="ivev" role="tab" data-toggle="tab">努力值调整</a></li>
+            <li role="presentation"><a href="#moves" aria-controls="moves" role="tab" data-toggle="tab">招式选择</a></li>
+            <li role="presentation"><a href="#batch" aria-controls="batch" role="tab" data-toggle="tab">批量队伍</a></li>
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="home">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div id="imageContainer" style="border: 2px solid rgb(50, 124, 252); border-radius: 47%; padding: 5px; display: inline-block; overflow: hidden; border-width: 4px; margin-top: 4px;">
+                                    <img id="speciesImage" src="img/Spritesimg/_n.png" alt="图片描述" width="40" height="40">
+                                </div>
+                            </td>
+                            <td>
+                                <div style="margin-top: 15px;">
                                     <select id="species" class="selectpicker" data-live-search="true" data-width="auto">
                                         <option>无</option>
                                     </select>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>性别</td>
-                                <td>
-                                    <select id="gender" class="selectpicker" data-width="auto">
-                                        <option>无</option>
-                                        <option>公</option>
-                                        <option>母</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr id="heldItemRow">
-                                <td>道具</td>
-                                <td>
-                                    <select id="heldItem" class="selectpicker" data-live-search="true"
-                                        data-width="auto">
-                                        <option value='None'>无</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>等级</td>
-                                <td>
-                                    <div class="form-group">
-                                        <input type="number" class="form-control" id="level" placeholder="1-100"
-                                            onchange="checkNum(this, 1, 100, 100)" style="width: 6em;">
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>闪光</td>
-                                <td>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" id="isShiny">
-                                        </label>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>蛋</td>
-                                <td>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" id="species1">
-                                        </label>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>方块闪</td>
-                                <td>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" id="isShiny1">
-                                        </label>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>剑盾神兽闪</td>
-                                <td>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" id="isShiny2">
-                                        </label>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>全招式</td>
-                                <td>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" id="allMove">
-                                        </label>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>全合法缎带(奖章)</td>
-                                <td>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" id="Ribbons">
-                                        </label>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>超极巨(剑盾)</td>
-                                <td>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" id="Gigantamax">
-                                        </label>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>球种</td>
-                                <td>
-                                    <select id="ball" class="selectpicker" data-live-search="true" data-width="auto">
-                                        <option value='None'>默认</option>
-                                        <option value='Master Ball'>大师球</option>
-                                        <option value='Ultra Ball'>高级球</option>
-                                        <option value='Great Ball'>超级球</option>
-                                        <option value='Poké Ball'>精灵球</option>
-                                        <option value='Safari Ball'>狩猎球</option>
-                                        <option value='Net Ball'>捕网球</option>
-                                        <option value='Dive Ball'>潜水球</option>
-                                        <option value='Nest Ball'>巢穴球</option>
-                                        <option value='Repeat Ball'>重复球</option>
-                                        <option value='Timer Ball'>计时球</option>
-                                        <option value='Luxury Ball'>豪华球</option>
-                                        <option value='Premier Ball'>纪念球</option>
-                                        <option value='Dusk Ball'>黑暗球</option>
-                                        <option value='Heal Ball'>治愈球</option>
-                                        <option value='Quick Ball'>先机球</option>
-                                        <option value='Cherish Ball'>贵重球</option>
-                                        <option value='Fast Ball'>速度球</option>
-                                        <option value='Level Ball'>等级球</option>
-                                        <option value='Lure Ball'>诱饵球</option>
-                                        <option value='Heavy Ball'>沉重球</option>
-                                        <option value='Love Ball'>甜蜜球</option>
-                                        <option value='Friend Ball'>友友球</option>
-                                        <option value='Moon Ball'>月亮球</option>
-                                        <option value='Sport Ball'>竞赛球</option>
-                                        <option value='Dream Ball'>梦境球</option>
-                                        <option value='Beast Ball'>究极球</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>野外之证</td>
-                                <td>
-<select id="ribbons" class="selectpicker" 
-        data-width="auto" 
-        multiple 
-        title="未选择"
-        data-selected-text-format="count > 2">
-    <option value='None'>默认</option>
-    <option value='Lunchtime=True'>正午之证</option>
-    <option value='Misty=True'>浓雾之证</option>
-    <option value='Peeved=True'>激动之证</option>
-    <option value='Prideful=True'>自信之证</option>
-    <option value='PumpedUp=True'>昂扬之证</option>
-    <option value='Rainy=True'>降雨之证</option>
-    <option value='Rare=True'>未知之证</option>
-    <option value='Rowdy=True'>淘气之证</option>
-    <option value='Sandstorm=True'>沙尘之证</option>
-    <option value='Scowling=True'>凶悍之证</option>
-    <option value='SleepyTime=True'>午夜之证</option>
-    <option value='Slump=True'>不振之证</option>
-    <option value='Smiley=True'>微笑之证</option>
-    <option value='Snowy=True'>降雪之证</option>
-    <option value='Stormy=True'>落雷之证</option>
-    <option value='Teary=True'>悲伤之证</option>
-    <option value='Thorny=True'>不纯之证</option>
-    <option value='Uncommon=True'>偶遇之证</option>
-    <option value='Unsure=True'>自卑之证</option>
-    <option value='Upbeat=True'>爽快之证</option>
-    <option value='Vigor=True'>活力之证</option>
-    <option value='ZeroEnergy=True'>倦怠之证</option>
-    <option value='ZonedOut=True'>疏忽之证</option>
-    <option value='AbsentMinded=True'>无滤之证</option>
-    <option value='Angry=True'>愤怒之证</option>
-    <option value='Blizzard=True'>暴雪之证</option>
-    <option value='Calmness=True'>冷静之证</option>
-    <option value='Charismatic=True'>领袖之证</option>
-    <option value='Cloudy=True'>阴云之证</option>
-    <option value='Crafty=True'>狡猾之证</option>
-    <option value='Curry=True'>咖喱之证</option>
-    <option value='Dawn=True'>佛晓之证</option>
-    <option value='Destiny=True'>命运之证</option>
-    <option value='Dry=True'>干燥之证</option>
-    <option value='Dusk=True'>黄昏之证</option>
-    <option value='Excited=True'>期待之证</option>
-    <option value='Ferocious=True'>本能之证</option>
-    <option value='Fishing=True'>上钩之证</option>
-    <option value='Flustered=True'>动摇之证</option>
-    <option value='Humble=True'>木讷之证</option>
-    <option value='Intellectual=True'>理性之证</option>
-    <option value='Intense=True'>热情之证</option>
-    <option value='Jittery=True'>紧张之证</option>
-    <option value='Joyful=True'>幸福之证</option>
-    <option value='Kindly=True'>优雅之证</option>
-    <option value='Itemfinder=True'>捡拾之证</option>
-    <option value='Partne=True'>搭档之证</option>
-    <option value='Gourmand=True'>美食之证</option>
-    <option value='Mightiest=True'>最强之证</option>
-</select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>特性</td>
-                                <td>
-                                    <select id="ability" class="selectpicker" data-width="auto">
-                                        <option>大力士</option>
-                                        <option>好家伙</option>
-                                        <option>梦特</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>性格</td>
-                                <td>
-                                    <select id="nature" class="selectpicker" data-live-search="true" data-width="auto">
-                                        <option value='Hardy'>勤奋(无改变)</option>
-                                        <option value='Lonely'>怕寂寞(+攻击-防御)</option>
-                                        <option value='Brave'>勇敢(+攻击-速度)</option>
-                                        <option value='Adamant'>固执(+攻击-特攻)</option>
-                                        <option value='Naughty'>顽皮(+攻击-特防)</option>
-                                        <option value='Bold'>大胆(+防御-攻击)</option>
-                                        <option value='Docile'>坦率(无改变)</option>
-                                        <option value='Relaxed'>悠闲(+防御-速度)</option>
-                                        <option value='Impish'>淘气(+防御-特攻)</option>
-                                        <option value='Lax'>乐天(+防御-特防)</option>
-                                        <option value='Timid'>胆小(+速度-攻击)</option>
-                                        <option value='Hasty'>急躁(+速度-防御)</option>
-                                        <option value='Serious'>认真(无改变)</option>
-                                        <option value='Jolly'>爽朗(+速度-特攻)</option>
-                                        <option value='Naive'>天真(+速度-特防)</option>
-                                        <option value='Modest'>内敛(+特攻-攻击)</option>
-                                        <option value='Mild'>慢吞吞(+特攻-防御)</option>
-                                        <option value='Quiet'>冷静(+特攻-速度)</option>
-                                        <option value='Bashful'>害羞(无改变)</option>
-                                        <option value='Rash'>马虎(+特攻-特防)</option>
-                                        <option value='Calm'>温和(+特防-攻击)</option>
-                                        <option value='Gentle'>温顺(+特防-防御)</option>
-                                        <option value='Sassy'>自大(+特防-速度)</option>
-                                        <option value='Careful'>慎重(+特防-特攻)</option>
-                                        <option value='Quirky'>浮躁(无改变)</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>太晶属性</td>
-                                <td>
-                                    <select id="teraType" class="selectpicker" data-width="auto">
-                                        <option value='None'>默认</option>
-                                        <option value='Normal'>一般</option>
-                                        <option value='Fighting'>格斗</option>
-                                        <option value='Flying'>飞行</option>
-                                        <option value='Poison'>毒</option>
-                                        <option value='Ground'>地面</option>
-                                        <option value='Rock'>岩石</option>
-                                        <option value='Bug'>虫</option>
-                                        <option value='Ghost'>幽灵</option>
-                                        <option value='Steel'>钢</option>
-                                        <option value='Fire'>火</option>
-                                        <option value='Water'>水</option>
-                                        <option value='Grass'>草</option>
-                                        <option value='Electric'>电</option>
-                                        <option value='Psychic'>超能力</option>
-                                        <option value='Ice'>冰</option>
-                                        <option value='Dragon'>龙</option>
-                                        <option value='Dark'>恶</option>
-                                        <option value='Fairy'>妖精</option>
-                                        <option value='Stellar'>星晶</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>语言</td>
-                                <td>
-                                    <select id="language" class="selectpicker" data-width="auto">
-                                        <option value="Japanese">日语</option>
-                                        <option value="English">英语</option>
-                                        <option value="French">法语</option>
-                                        <option value="Italian">意大利语</option>
-                                        <option value="German">德语</option>
-                                        <option value="Spanish">西班牙语</option>
-                                        <option value="Korean">韩语</option>
-                                        <option value="ChineseS" selected>简体中文</option>
-                                        <option value="ChineseT">繁体中文</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>性别</td>
+                            <td>
+                                <select id="gender" class="selectpicker" data-width="auto">
+                                    <option>无</option>
+                                    <option>公</option>
+                                    <option>母</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr id="heldItemRow">
+                            <td>道具</td>
+                            <td>
+                                <select id="heldItem" class="selectpicker" data-live-search="true" data-width="auto">
+                                    <option value='None'>无</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>等级</td>
+                            <td>
+                                <div class="form-group">
+                                    <input type="number" class="form-control" id="level" placeholder="1-100"
+                                        onchange="checkNum(this, 1, 100, 100)" style="width: 6em;">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>闪光</td>
+                            <td>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" id="isShiny">
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>蛋</td>
+                            <td>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" id="species1">
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>方块闪</td>
+                            <td>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" id="isShiny1">
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>剑盾神兽闪</td>
+                            <td>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" id="isShiny2">
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>全招式</td>
+                            <td>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" id="allMove">
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>全合法缎带(奖章)</td>
+                            <td>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" id="Ribbons">
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>超极巨(剑盾)</td>
+                            <td>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" id="Gigantamax">
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>球种</td>
+                            <td>
+                                <select id="ball" class="selectpicker" data-live-search="true" data-width="auto">
+                                    <option value='None'>默认</option>
+                                    <option value='Master Ball'>大师球</option>
+                                    <option value='Ultra Ball'>高级球</option>
+                                    <option value='Great Ball'>超级球</option>
+                                    <option value='Poké Ball'>精灵球</option>
+                                    <option value='Safari Ball'>狩猎球</option>
+                                    <option value='Net Ball'>捕网球</option>
+                                    <option value='Dive Ball'>潜水球</option>
+                                    <option value='Nest Ball'>巢穴球</option>
+                                    <option value='Repeat Ball'>重复球</option>
+                                    <option value='Timer Ball'>计时球</option>
+                                    <option value='Luxury Ball'>豪华球</option>
+                                    <option value='Premier Ball'>纪念球</option>
+                                    <option value='Dusk Ball'>黑暗球</option>
+                                    <option value='Heal Ball'>治愈球</option>
+                                    <option value='Quick Ball'>先机球</option>
+                                    <option value='Cherish Ball'>贵重球</option>
+                                    <option value='Fast Ball'>速度球</option>
+                                    <option value='Level Ball'>等级球</option>
+                                    <option value='Lure Ball'>诱饵球</option>
+                                    <option value='Heavy Ball'>沉重球</option>
+                                    <option value='Love Ball'>甜蜜球</option>
+                                    <option value='Friend Ball'>友友球</option>
+                                    <option value='Moon Ball'>月亮球</option>
+                                    <option value='Sport Ball'>竞赛球</option>
+                                    <option value='Dream Ball'>梦境球</option>
+                                    <option value='Beast Ball'>究极球</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>野外之证</td>
+                            <td>
+                                <select id="ribbons" class="selectpicker" data-width="auto" multiple title="未选择" data-selected-text-format="count > 2">
+                                    <option value='None'>默认</option>
+                                    <option value='Lunchtime=True'>正午之证</option>
+                                    <option value='Misty=True'>浓雾之证</option>
+                                    <option value='Peeved=True'>激动之证</option>
+                                    <option value='Prideful=True'>自信之证</option>
+                                    <option value='PumpedUp=True'>昂扬之证</option>
+                                    <option value='Rainy=True'>降雨之证</option>
+                                    <option value='Rare=True'>未知之证</option>
+                                    <option value='Rowdy=True'>淘气之证</option>
+                                    <option value='Sandstorm=True'>沙尘之证</option>
+                                    <option value='Scowling=True'>凶悍之证</option>
+                                    <option value='SleepyTime=True'>午夜之证</option>
+                                    <option value='Slump=True'>不振之证</option>
+                                    <option value='Smiley=True'>微笑之证</option>
+                                    <option value='Snowy=True'>降雪之证</option>
+                                    <option value='Stormy=True'>落雷之证</option>
+                                    <option value='Teary=True'>悲伤之证</option>
+                                    <option value='Thorny=True'>不纯之证</option>
+                                    <option value='Uncommon=True'>偶遇之证</option>
+                                    <option value='Unsure=True'>自卑之证</option>
+                                    <option value='Upbeat=True'>爽快之证</option>
+                                    <option value='Vigor=True'>活力之证</option>
+                                    <option value='ZeroEnergy=True'>倦怠之证</option>
+                                    <option value='ZonedOut=True'>疏忽之证</option>
+                                    <option value='AbsentMinded=True'>无滤之证</option>
+                                    <option value='Angry=True'>愤怒之证</option>
+                                    <option value='Blizzard=True'>暴雪之证</option>
+                                    <option value='Calmness=True'>冷静之证</option>
+                                    <option value='Charismatic=True'>领袖之证</option>
+                                    <option value='Cloudy=True'>阴云之证</option>
+                                    <option value='Crafty=True'>狡猾之证</option>
+                                    <option value='Curry=True'>咖喱之证</option>
+                                    <option value='Dawn=True'>佛晓之证</option>
+                                    <option value='Destiny=True'>命运之证</option>
+                                    <option value='Dry=True'>干燥之证</option>
+                                    <option value='Dusk=True'>黄昏之证</option>
+                                    <option value='Excited=True'>期待之证</option>
+                                    <option value='Ferocious=True'>本能之证</option>
+                                    <option value='Fishing=True'>上钩之证</option>
+                                    <option value='Flustered=True'>动摇之证</option>
+                                    <option value='Humble=True'>木讷之证</option>
+                                    <option value='Intellectual=True'>理性之证</option>
+                                    <option value='Intense=True'>热情之证</option>
+                                    <option value='Jittery=True'>紧张之证</option>
+                                    <option value='Joyful=True'>幸福之证</option>
+                                    <option value='Kindly=True'>优雅之证</option>
+                                    <option value='Itemfinder=True'>捡拾之证</option>
+                                    <option value='Partner=True'>搭档之证</option>
+                                    <option value='Gourmand=True'>美食之证</option>
+                                    <option value='Mightiest=True'>最强之证</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>特性</td>
+                            <td>
+                                <select id="ability" class="selectpicker" data-width="auto">
+                                    <option>大力士</option>
+                                    <option>好家伙</option>
+                                    <option>梦特</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>性格</td>
+                            <td>
+                                <select id="nature" class="selectpicker" data-live-search="true" data-width="auto">
+                                    <option value='Hardy'>勤奋(无改变)</option>
+                                    <option value='Lonely'>怕寂寞(+攻击-防御)</option>
+                                    <option value='Brave'>勇敢(+攻击-速度)</option>
+                                    <option value='Adamant'>固执(+攻击-特攻)</option>
+                                    <option value='Naughty'>顽皮(+攻击-特防)</option>
+                                    <option value='Bold'>大胆(+防御-攻击)</option>
+                                    <option value='Docile'>坦率(无改变)</option>
+                                    <option value='Relaxed'>悠闲(+防御-速度)</option>
+                                    <option value='Impish'>淘气(+防御-特攻)</option>
+                                    <option value='Lax'>乐天(+防御-特防)</option>
+                                    <option value='Timid'>胆小(+速度-攻击)</option>
+                                    <option value='Hasty'>急躁(+速度-防御)</option>
+                                    <option value='Serious'>认真(无改变)</option>
+                                    <option value='Jolly'>爽朗(+速度-特攻)</option>
+                                    <option value='Naive'>天真(+速度-特防)</option>
+                                    <option value='Modest'>内敛(+特攻-攻击)</option>
+                                    <option value='Mild'>慢吞吞(+特攻-防御)</option>
+                                    <option value='Quiet'>冷静(+特攻-速度)</option>
+                                    <option value='Bashful'>害羞(无改变)</option>
+                                    <option value='Rash'>马虎(+特攻-特防)</option>
+                                    <option value='Calm'>温和(+特防-攻击)</option>
+                                    <option value='Gentle'>温顺(+特防-防御)</option>
+                                    <option value='Sassy'>自大(+特防-速度)</option>
+                                    <option value='Careful'>慎重(+特防-特攻)</option>
+                                    <option value='Quirky'>浮躁(无改变)</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>太晶属性</td>
+                            <td>
+                                <select id="teraType" class="selectpicker" data-width="auto">
+                                    <option value='None'>默认</option>
+                                    <option value='Normal'>一般</option>
+                                    <option value='Fighting'>格斗</option>
+                                    <option value='Flying'>飞行</option>
+                                    <option value='Poison'>毒</option>
+                                    <option value='Ground'>地面</option>
+                                    <option value='Rock'>岩石</option>
+                                    <option value='Bug'>虫</option>
+                                    <option value='Ghost'>幽灵</option>
+                                    <option value='Steel'>钢</option>
+                                    <option value='Fire'>火</option>
+                                    <option value='Water'>水</option>
+                                    <option value='Grass'>草</option>
+                                    <option value='Electric'>电</option>
+                                    <option value='Psychic'>超能力</option>
+                                    <option value='Ice'>冰</option>
+                                    <option value='Dragon'>龙</option>
+                                    <option value='Dark'>恶</option>
+                                    <option value='Fairy'>妖精</option>
+                                    <option value='Stellar'>星晶</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>语言</td>
+                            <td>
+                                <select id="language" class="selectpicker" data-width="auto">
+                                    <option value="Japanese">日语</option>
+                                    <option value="English">英语</option>
+                                    <option value="French">法语</option>
+                                    <option value="Italian">意大利语</option>
+                                    <option value="German">德语</option>
+                                    <option value="Spanish">西班牙语</option>
+                                    <option value="Korean">韩语</option>
+                                    <option value="ChineseS" selected>简体中文</option>
+                                    <option value="ChineseT">繁体中文</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
                             <td>捕获日期</td>
                             <td>
                                 <div class="form-group">
@@ -480,303 +458,289 @@
                                     <small style="color: #888;">格式：日(1-31) 月(1-12) 年(0-99代表2000-2099)</small>
                                 </div>
                             </td>
-                            </tr>
-                            <tr>
-                                <td>体型</td>
-                                <td>
-                                    <div class="form-group">
-                                        <input id="scale" type="number" class="form-control" id="level"
-                                            placeholder="0-255" onchange="checkNum(this, 0, 255, 128)"
-                                            style="width: 6em;">
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div role="tabpanel" class="tab-pane" id="ivev">
-                    <table class="table">
-                        <tbody>
-                            <tr>
-                                <td style="width: 44px;"></td>
-                                <td>个体值 0~31</td>
-                                <td>努力值 0~252</td>
-                            </tr>
-                            <tr>
-                                <td style="width: 44px;">HP</td>
-                                <td class="iv">
-                                    <div class="form-group form-inline">
-                                        <input type="number" class="form-control" placeholder=""
-                                            style="width: 4em; display: inline;" value="31" onchange="checkNum(this, 0, 31, 31)">
-                                        <input class="btn btn-info" type="button" value="最小" onclick="toNumberIV(this)">
-                                    </div>
-                                </td>
-                                <td class="ev">
-                                    <div class="form-group form-inline">
-                                        <input type="number" class="form-control" placeholder=""
-                                            style="width: 5em; display: inline;" onchange="checkNum(this, 0, 252, 252)">
-                                        <input class="btn btn-info" type="button" value="最大"
-                                            onclick="toNumberEV(this)">
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="width: 44px;">攻击</td>
-                                <td class="iv">
-                                    <div class="form-group form-inline">
-                                        <input type="number" class="form-control" placeholder=""
-                                            style="width: 4em; display: inline;" value="31" onchange="checkNum(this, 0, 31, 31)">
-                                        <input class="btn btn-info" type="button" value="最小" onclick="toNumberIV(this)">
-                                    </div>
-                                </td>
-                                <td class="ev">
-                                    <div class="form-group form-inline">
-                                        <input type="number" class="form-control" placeholder=""
-                                            style="width: 5em; display: inline;" onchange="checkNum(this, 0, 252, 252)">
-                                        <input class="btn btn-info" type="button" value="最大"
-                                            onclick="toNumberEV(this)">
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="width: 44px;">防御</td>
-                                <td class="iv">
-                                    <div class="form-group form-inline">
-                                        <input type="number" class="form-control" placeholder=""
-                                            style="width: 4em; display: inline;" value="31" onchange="checkNum(this, 0, 31, 31)">
-                                        <input class="btn btn-info" type="button" value="最小" onclick="toNumberIV(this)">
-                                    </div>
-                                </td>
-                                <td class="ev">
-                                    <div class="form-group form-inline">
-                                        <input type="number" class="form-control" placeholder=""
-                                            style="width: 5em; display: inline;" onchange="checkNum(this, 0, 252, 252)">
-                                        <input class="btn btn-info" type="button" value="最大"
-                                            onclick="toNumberEV(this)">
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="width: 44px;">特攻</td>
-                                <td class="iv">
-                                    <div class="form-group form-inline">
-                                        <input type="number" class="form-control" placeholder=""
-                                            style="width: 4em; display: inline;" value="31" onchange="checkNum(this, 0, 31, 31)">
-                                        <input class="btn btn-info" type="button" value="最小" onclick="toNumberIV(this)">
-                                    </div>
-                                </td>
-                                <td class="ev">
-                                    <div class="form-group form-inline">
-                                        <input type="number" class="form-control" placeholder=""
-                                            style="width: 5em; display: inline;" onchange="checkNum(this, 0, 252, 252)">
-                                        <input class="btn btn-info" type="button" value="最大"
-                                            onclick="toNumberEV(this)">
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="width: 44px;">特防</td>
-                                <td class="iv">
-                                    <div class="form-group form-inline">
-                                        <input type="number" class="form-control" placeholder=""
-                                            style="width: 4em; display: inline;" value="31" onchange="checkNum(this, 0, 31, 31)">
-                                        <input class="btn btn-info" type="button" value="最小" onclick="toNumberIV(this)">
-                                    </div>
-                                </td>
-                                <td class="ev">
-                                    <div class="form-group form-inline">
-                                        <input type="number" class="form-control" placeholder=""
-                                            style="width: 5em; display: inline;" onchange="checkNum(this, 0, 252, 252)">
-                                        <input class="btn btn-info" type="button" value="最大"
-                                            onclick="toNumberEV(this)">
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="width: 44px;">速度</td>
-                                <td class="iv">
-                                    <div class="form-group form-inline">
-                                        <input type="number" class="form-control" placeholder=""
-                                            style="width: 4em; display: inline;" value="31" onchange="checkNum(this, 0, 31, 31)">
-                                        <input class="btn btn-info" type="button" value="最小" onclick="toNumberIV(this)">
-                                    </div>
-                                </td>
-                                <td class="ev">
-                                    <div class="form-group form-inline">
-                                        <input type="number" class="form-control" placeholder=""
-                                            style="width: 5em; display: inline;" onchange="checkNum(this, 0, 252, 252)">
-                                        <input class="btn btn-info" type="button" value="最大"
-                                            onclick="toNumberEV(this)">
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div role="tabpanel" class="tab-pane" id="moves">
-                    <table class="table">
-                        <tbody>
-                            <tr>
-                                <td>招式1</td>
-                                <td>
-                                    <select id="move1" class="selectpicker" data-live-search="true" data-width="8em">
-                                        <option>击掌奇袭</option>
-                                        <option>喷射火焰</option>
-                                        <option>龙爪</option>
-                                    </select>
-                                <td>满PP</td>
-                                <td>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" id="Movesup1">
-                                        </label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>招式2</td>
-                                <td>
-                                    <select id="move2" class="selectpicker" data-live-search="true" data-width="8em">
-                                        <option>击掌奇袭</option>
-                                        <option>喷射火焰</option>
-                                        <option>龙爪</option>
-                                    </select>
-                                <td>满PP</td>
-                                <td>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" id="Movesup2">
-                                        </label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>招式3</td>
-                                <td>
-                                    <select id="move3" class="selectpicker" data-live-search="true" data-width="8em">
-                                        <option>击掌奇袭</option>
-                                        <option>喷射火焰</option>
-                                        <option>龙爪</option>
-                                    </select>
-                                <td>满PP</td>
-                                <td>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" id="Movesup3">
-                                        </label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>招式4</td>
-                                <td>
-                                    <select id="move4" class="selectpicker" data-live-search="true" data-width="8em">
-                                        <option>击掌奇袭</option>
-                                        <option>喷射火焰</option>
-                                        <option>龙爪</option>
-                                    </select>
-                                <td>满PP</td>
-                                <td>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" id="Movesup4">
-                                        </label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>一键全满PP</td>
-                                <td>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" id="Movesup">⚠️如已勾选此选项,上面的请勿勾选⚠️
-                                        </label>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>随机招式</td>
-                                <td>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" id="Movesmax">
-                                        </label>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div role="tabpanel" class="tab-pane" id="tidsid">
-                    <table class="table">
-                        <tbody>
-                            <tr>
-                                <td>初训家</td>
-                                <td>
-                                    <div class="form-group">
-                                        <label>
-                                        <input type="form-group"  id="chu" placeholder="初训家名字"
-                                              style="width: 10em;">
-                                        <label>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>里ID</td>
-                                <td>
-                                    <div class="form-group">
-                                        <input type="number" class="form-control" id="li" placeholder="里ID4位"
-                                             style="width: 10em;">
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>表ID</td>
-                                <td>
-                                    <div class="form-group">
-                                        <input type="number" class="form-control" id="biao" placeholder="表ID6位"
-                                             style="width: 10em;">
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>⚠️特别说明:自己填自ID的情况下普通闪光的选项会失效,此自ID建议在剑盾版本的方块闪模式下配合使用否则请慎重使用</td>
-                            </tr>
-                            <tr>
-                                <td>⚠️如需配合使用普通闪光模式的可以勾选下面的特殊闪光选项</td>
-                            </tr>
-                            <tr>
-                                <td>配合自ID普通闪</td>
-                                <td>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" id="isShiny3">
-                                        </label>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div role="tabpanel" class="tab-pane" id="batch">
-                    <table class="table">
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <input class="btn btn-infos" type="button" value="批量导出"
-                                           onclick="exportbatchPS()">
-                                    <input class="btn btn-infos2" type="button" value="清除全部"
-                                           onclick="clearbatchPS()">
-                                    <input class="btn btn-infos3" type="button" value="清除新增"
-                                           onclick="clearfinalPS()">
-                                    已添加：<span id="psVariable">0</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                        </tr>
+                        <tr>
+                            <td>体型</td>
+                            <td>
+                                <div class="form-group">
+                                    <input id="scale" type="number" class="form-control" placeholder="0-255"
+                                        onchange="checkNum(this, 0, 255, 128)" style="width: 6em;">
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="ivev">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td style="width: 44px;"></td>
+                            <td>个体值 0~31</td>
+                            <td>努力值 0~252</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 44px;">HP</td>
+                            <td class="iv">
+                                <div class="form-group form-inline">
+                                    <input type="number" class="form-control" placeholder=""
+                                        style="width: 4em; display: inline;" value="31" onchange="checkNum(this, 0, 31, 31)">
+                                    <input class="btn btn-info" type="button" value="最小" onclick="toNumberIV(this)">
+                                </div>
+                            </td>
+                            <td class="ev">
+                                <div class="form-group form-inline">
+                                    <input type="number" class="form-control" placeholder=""
+                                        style="width: 5em; display: inline;" onchange="checkNum(this, 0, 252, 252)">
+                                    <input class="btn btn-info" type="button" value="最大" onclick="toNumberEV(this)">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 44px;">攻击</td>
+                            <td class="iv">
+                                <div class="form-group form-inline">
+                                    <input type="number" class="form-control" placeholder=""
+                                        style="width: 4em; display: inline;" value="31" onchange="checkNum(this, 0, 31, 31)">
+                                    <input class="btn btn-info" type="button" value="最小" onclick="toNumberIV(this)">
+                                </div>
+                            </td>
+                            <td class="ev">
+                                <div class="form-group form-inline">
+                                    <input type="number" class="form-control" placeholder=""
+                                        style="width: 5em; display: inline;" onchange="checkNum(this, 0, 252, 252)">
+                                    <input class="btn btn-info" type="button" value="最大" onclick="toNumberEV(this)">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 44px;">防御</td>
+                            <td class="iv">
+                                <div class="form-group form-inline">
+                                    <input type="number" class="form-control" placeholder=""
+                                        style="width: 4em; display: inline;" value="31" onchange="checkNum(this, 0, 31, 31)">
+                                    <input class="btn btn-info" type="button" value="最小" onclick="toNumberIV(this)">
+                                </div>
+                            </td>
+                            <td class="ev">
+                                <div class="form-group form-inline">
+                                    <input type="number" class="form-control" placeholder=""
+                                        style="width: 5em; display: inline;" onchange="checkNum(this, 0, 252, 252)">
+                                    <input class="btn btn-info" type="button" value="最大" onclick="toNumberEV(this)">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 44px;">特攻</td>
+                            <td class="iv">
+                                <div class="form-group form-inline">
+                                    <input type="number" class="form-control" placeholder=""
+                                        style="width: 4em; display: inline;" value="31" onchange="checkNum(this, 0, 31, 31)">
+                                    <input class="btn btn-info" type="button" value="最小" onclick="toNumberIV(this)">
+                                </div>
+                            </td>
+                            <td class="ev">
+                                <div class="form-group form-inline">
+                                    <input type="number" class="form-control" placeholder=""
+                                        style="width: 5em; display: inline;" onchange="checkNum(this, 0, 252, 252)">
+                                    <input class="btn btn-info" type="button" value="最大" onclick="toNumberEV(this)">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 44px;">特防</td>
+                            <td class="iv">
+                                <div class="form-group form-inline">
+                                    <input type="number" class="form-control" placeholder=""
+                                        style="width: 4em; display: inline;" value="31" onchange="checkNum(this, 0, 31, 31)">
+                                    <input class="btn btn-info" type="button" value="最小" onclick="toNumberIV(this)">
+                                </div>
+                            </td>
+                            <td class="ev">
+                                <div class="form-group form-inline">
+                                    <input type="number" class="form-control" placeholder=""
+                                        style="width: 5em; display: inline;" onchange="checkNum(this, 0, 252, 252)">
+                                    <input class="btn btn-info" type="button" value="最大" onclick="toNumberEV(this)">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 44px;">速度</td>
+                            <td class="iv">
+                                <div class="form-group form-inline">
+                                    <input type="number" class="form-control" placeholder=""
+                                        style="width: 4em; display: inline;" value="31" onchange="checkNum(this, 0, 31, 31)">
+                                    <input class="btn btn-info" type="button" value="最小" onclick="toNumberIV(this)">
+                                </div>
+                            </td>
+                            <td class="ev">
+                                <div class="form-group form-inline">
+                                    <input type="number" class="form-control" placeholder=""
+                                        style="width: 5em; display: inline;" onchange="checkNum(this, 0, 252, 252)">
+                                    <input class="btn btn-info" type="button" value="最大" onclick="toNumberEV(this)">
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="moves">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td>招式1</td>
+                            <td>
+                                <select id="move1" class="selectpicker" data-live-search="true" data-width="8em">
+                                    <option>击掌奇袭</option>
+                                    <option>喷射火焰</option>
+                                    <option>龙爪</option>
+                                </select>
+                            </td>
+                            <td>PP提升</td>
+                            <td>
+                                <select id="ppUps1" class="selectpicker" data-width="auto">
+                                    <option value="0">无</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>招式2</td>
+                            <td>
+                                <select id="move2" class="selectpicker" data-live-search="true" data-width="8em">
+                                    <option>击掌奇袭</option>
+                                    <option>喷射火焰</option>
+                                    <option>龙爪</option>
+                                </select>
+                            </td>
+                            <td>PP提升</td>
+                            <td>
+                                <select id="ppUps2" class="selectpicker" data-width="auto">
+                                    <option value="0">无</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>招式3</td>
+                            <td>
+                                <select id="move3" class="selectpicker" data-live-search="true" data-width="8em">
+                                    <option>击掌奇袭</option>
+                                    <option>喷射火焰</option>
+                                    <option>龙爪</option>
+                                </select>
+                            </td>
+                            <td>PP提升</td>
+                            <td>
+                                <select id="ppUps3" class="selectpicker" data-width="auto">
+                                    <option value="0">无</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>招式4</td>
+                            <td>
+                                <select id="move4" class="selectpicker" data-live-search="true" data-width="8em">
+                                    <option>击掌奇袭</option>
+                                    <option>喷射火焰</option>
+                                    <option>龙爪</option>
+                                </select>
+                            </td>
+                            <td>PP提升</td>
+                            <td>
+                                <select id="ppUps4" class="selectpicker" data-width="auto">
+                                    <option value="0">无</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>随机招式</td>
+                            <td>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" id="Movesmax">
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="tidsid">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td>初训家</td>
+                            <td>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="chu" placeholder="初训家名字"
+                                        style="width: 10em;">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>里ID</td>
+                            <td>
+                                <div class="form-group">
+                                    <input type="number" class="form-control" id="li" placeholder="里ID4位"
+                                        style="width: 10em;">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>表ID</td>
+                            <td>
+                                <div class="form-group">
+                                    <input type="number" class="form-control" id="biao" placeholder="表ID6位"
+                                        style="width: 10em;">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>⚠️特别说明:自己填自ID的情况下普通闪光的选项会失效,此自ID建议在剑盾版本的方块闪模式下配合使用否则请慎重使用</td>
+                        </tr>
+                        <tr>
+                            <td>⚠️如需配合使用普通闪光模式的可以勾选下面的特殊闪光选项</td>
+                        </tr>
+                        <tr>
+                            <td>配合自ID普通闪</td>
+                            <td>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" id="isShiny3">
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="batch">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <input class="btn btn-infos" type="button" value="批量导出" onclick="exportbatchPS()">
+                                <input class="btn btn-infos2" type="button" value="清除全部" onclick="clearbatchPS()">
+                                <input class="btn btn-infos3" type="button" value="清除新增" onclick="clearfinalPS()">
+                                已添加：<span id="psVariable">0</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -793,19 +757,29 @@
     <script src="pkdate/ablilities.js?v=20240305"></script>
     <script src="pkdate/items.js?v=20240305"></script>
     <script>
-        $(document).ready(function () {
+        function initializeApp() {
+            if (typeof pk_species === 'undefined' || typeof pk_items === 'undefined' || typeof pk_ablilities === 'undefined' || typeof pk_moves === 'undefined') {
+                console.error('One or more required data variables (pk_species, pk_items, pk_ablilities, pk_moves) are not defined.');
+                $('#error-message').show();
+                return;
+            }
+
             let $species = $("#species");
             $species.empty();
-            for(let s in pk_species) {
+            for (let s in pk_species) {
                 $("#species").append('<option value="' + s + '">' + pk_species[s][0] + '</option>');
             }
             $species.selectpicker('refresh');
+
             let $heldItem = $("#heldItem");
             $heldItem.empty();
             for (let i = 0; i < pk_items.length; i++) {
                 $heldItem.append('<option value="' + pk_items[i][1] + '">' + pk_items[i][0] + '</option>');
             }
+            $heldItem.selectpicker('refresh');
+
             refresh();
+
             $("#species").change(function () {
                 refresh();
             });
@@ -822,16 +796,19 @@
                     $("#heldItemRow").show();
                 }
             });
+        }
+
+        $(document).ready(function () {
+            setTimeout(initializeApp, 100);
         });
 
         function changeImage(species) {
-            var selectElement = document.getElementById("species");
+            if (!pk_species[species]) return;
             var imageElement = document.getElementById("speciesImage");
             var imageSrc = pk_species[species][4];
             if ($("#isShiny").prop('checked')) {
                 imageSrc += "_r";
-            }
-            else {
+            } else {
                 imageSrc += "_n";
             }
             imageElement.src = "img/Spritesimg/" + imageSrc + ".png";
@@ -841,96 +818,42 @@
             var borderColor;
             var ballcolor = $("#ball").val();
             switch (ballcolor) {
-                case "None":
-                borderColor = "rgb(226,88,62)";
-                    break;
-                case "Master Ball":
-                borderColor = "rgb(172, 28, 172)";
-                    break;
-                case "Ultra Ball":
-                borderColor = "rgb(231, 205, 88)";
-                    break;
-                case "Great Ball":
-                borderColor = "rgb(50, 124, 252)";
-                    break;
-                case "Poké Ball":
-                borderColor = "rgb(226,88,62)";
-                    break;
-                case "Safari Ball":
-                borderColor = "rgb(128, 128, 0)";
-                    break;
-                case "Net Ball":
-                borderColor = "rgb(91, 186, 199)";
-                    break;
-                case "Dive Ball":
-                borderColor = "rgb(123, 196, 232)";
-                    break;
-                case "Nest Ball":
-                borderColor = "rgb(120, 190, 32)";
-                    break;
-                case "Repeat Ball":
-                borderColor = "rgb(229,116,59)";
-                    break;
-                case "Timer Ball":
-                borderColor = "rgb(133,104,106)"
-                    break;
-                case "Luxury Ball":
-                borderColor = "rgb(74,82,84)";
-                    break;
-                case "Premier Ball":
-                borderColor = "rgb(229,237,255)";
-                    break;
-                case "Dusk Ball":
-                borderColor = "rgb(87,133,78)";
-                    break;
-                case "Heal Ball":
-                borderColor = "rgb(242,113,217)";
-                    break;
-                case "Quick Ball":
-                borderColor = "rgb(227,237,85)";
-                    break;
-                case "Cherish Ball":
-                borderColor = "red";
-                    break;
-                case "Fast Ball":
-                borderColor = "rgb(240,143,72)";
-                    break;
-                case "Level Ball":
-                borderColor = "rgb(237,189,149)";
-                    break;
-                case "Lure Ball":
-                borderColor = "rgb(56,164,208)";
-                    break;
-                case "Heavy Ball":
-                borderColor = "rgb(149,167,180)";
-                    break;
-                case "Love Ball":
-                borderColor = "rgb(250,203,233)";
-                    break;
-                case "Friend Ball":
-                borderColor = "rgb(140,201,71)";
-                    break;
-                case "Moon Ball":
-                borderColor = "rgb(115,160,173)";
-                    break;
-                case "Sport Ball":
-                borderColor = "rgb(255,142,52)";
-                    break;
-                case "Dream Ball":
-                borderColor = "rgb(255,105,151)";
-                    break;
-                case "Beast Ball":
-                borderColor = "rgb(7,98,200)";
-                    break;
-                default:
-                borderColor = "rgb(226,88,62)";
-                    break;
-                }
-            document.getElementById("imageContainer").style = "border: 2px solid "+ borderColor +"; border-radius: 48%; padding: 5px; display: inline-block; overflow: hidden; border-width: 4px; margin-top: 4px;";
+                case "None": borderColor = "rgb(226,88,62)"; break;
+                case "Master Ball": borderColor = "rgb(172, 28, 172)"; break;
+                case "Ultra Ball": borderColor = "rgb(231, 205, 88)"; break;
+                case "Great Ball": borderColor = "rgb(50, 124, 252)"; break;
+                case "Poké Ball": borderColor = "rgb(226,88,62)"; break;
+                case "Safari Ball": borderColor = "rgb(128, 128, 0)"; break;
+                case "Net Ball": borderColor = "rgb(91, 186, 199)"; break;
+                case "Dive Ball": borderColor = "rgb(123, 196, 232)"; break;
+                case "Nest Ball": borderColor = "rgb(120, 190, 32)"; break;
+                case "Repeat Ball": borderColor = "rgb(229,116,59)"; break;
+                case "Timer Ball": borderColor = "rgb(133,104,106)"; break;
+                case "Luxury Ball": borderColor = "rgb(74,82,84)"; break;
+                case "Premier Ball": borderColor = "rgb(229,237,255)"; break;
+                case "Dusk Ball": borderColor = "rgb(87,133,78)"; break;
+                case "Heal Ball": borderColor = "rgb(242,113,217)"; break;
+                case "Quick Ball": borderColor = "rgb(227,237,85)"; break;
+                case "Cherish Ball": borderColor = "red"; break;
+                case "Fast Ball": borderColor = "rgb(240,143,72)"; break;
+                case "Level Ball": borderColor = "rgb(237,189,149)"; break;
+                case "Lure Ball": borderColor = "rgb(56,164,208)"; break;
+                case "Heavy Ball": borderColor = "rgb(149,167,180)"; break;
+                case "Love Ball": borderColor = "rgb(250,203,233)"; break;
+                case "Friend Ball": borderColor = "rgb(140,201,71)"; break;
+                case "Moon Ball": borderColor = "rgb(115,160,173)"; break;
+                case "Sport Ball": borderColor = "rgb(255,142,52)"; break;
+                case "Dream Ball": borderColor = "rgb(255,105,151)"; break;
+                case "Beast Ball": borderColor = "rgb(7,98,200)"; break;
+                default: borderColor = "rgb(226,88,62)"; break;
+            }
+            document.getElementById("imageContainer").style = "border: 2px solid " + borderColor + "; border-radius: 48%; padding: 5px; display: inline-block; overflow: hidden; border-width: 4px; margin-top: 4px;";
         }
 
         function refresh() {
+            if (typeof pk_species === 'undefined') return;
             var species = $("#species").val();
+            if (!pk_species[species]) return;
             var gender = pk_species[species][1];
             updateBorderColor();
             changeImage(species);
@@ -948,30 +871,30 @@
             $("#gender").selectpicker('refresh');
             var abilities = pk_species[species][2];
             $("#ability").empty();
-            if (pk_ablilities[[abilities[0]]][1] == pk_ablilities[[abilities[1]]][1] && pk_ablilities[[abilities[0]]][1] == pk_ablilities[[abilities[2]]][1]){
-                $("#ability").append('<option value="' + pk_ablilities[[abilities[0]]][1] + '">' + pk_ablilities[abilities[0]][0] + '</option>');
-            }
-            else if (pk_ablilities[[abilities[0]]][1] == pk_ablilities[[abilities[1]]][1] && pk_ablilities[[abilities[0]]][1] != pk_ablilities[[abilities[2]]][1]){
-                $("#ability").append('<option value="' + pk_ablilities[[abilities[0]]][1] + '">' + pk_ablilities[abilities[0]][0] + '</option>');
-                $("#ability").append('<option value="' + pk_ablilities[[abilities[2]]][1] + '">' + pk_ablilities[abilities[2]][0] + '</option>');
-            }
-            else{
-                $("#ability").append('<option value="' + pk_ablilities[[abilities[0]]][1] + '">' + pk_ablilities[abilities[0]][0] + '</option>');
-                $("#ability").append('<option value="' + pk_ablilities[[abilities[1]]][1] + '">' + pk_ablilities[abilities[1]][0] + '</option>');
-                $("#ability").append('<option value="' + pk_ablilities[[abilities[2]]][1] + '">' + pk_ablilities[abilities[2]][0] + '</option>');
+            if (pk_ablilities[abilities[0]][1] == pk_ablilities[abilities[1]][1] && pk_ablilities[abilities[0]][1] == pk_ablilities[abilities[2]][1]) {
+                $("#ability").append('<option value="' + pk_ablilities[abilities[0]][1] + '">' + pk_ablilities[abilities[0]][0] + '</option>');
+            } else if (pk_ablilities[abilities[0]][1] == pk_ablilities[abilities[1]][1] && pk_ablilities[abilities[0]][1] != pk_ablilities[abilities[2]][1]) {
+                $("#ability").append('<option value="' + pk_ablilities[abilities[0]][1] + '">' + pk_ablilities[abilities[0]][0] + '</option>');
+                $("#ability").append('<option value="' + pk_ablilities[abilities[2]][1] + '">' + pk_ablilities[abilities[2]][0] + '</option>');
+            } else {
+                $("#ability").append('<option value="' + pk_ablilities[abilities[0]][1] + '">' + pk_ablilities[abilities[0]][0] + '</option>');
+                $("#ability").append('<option value="' + pk_ablilities[abilities[1]][1] + '">' + pk_ablilities[abilities[1]][0] + '</option>');
+                $("#ability").append('<option value="' + pk_ablilities[abilities[2]][1] + '">' + pk_ablilities[abilities[2]][0] + '</option>');
             }
             $("#ability").selectpicker('refresh');
             refreshMoves(species);
         }
 
         function refreshMoves(species) {
+            if (typeof pk_species === 'undefined' || typeof pk_moves === 'undefined') return;
             refreshMove($("#move1"), species);
             refreshMove($("#move2"), species);
             refreshMove($("#move3"), species);
             refreshMove($("#move4"), species);
         }
-        
+
         function refreshMove($move, species) {
+            if (!pk_species[species]) return;
             $move.empty();
             var moveIndexs = pk_species[species][3];
             $move.append('<option value="None">无</option>');
@@ -980,7 +903,7 @@
             }
             $move.selectpicker('refresh');
         }
-        
+
         function checkNum(o, start, end, defaultValue) {
             var $o = $(o);
             var value = $o.val();
@@ -988,7 +911,7 @@
                 $o.val(defaultValue);
             }
         }
-        
+
         function toNumberIV(o) {
             var $o = $(o);
             var $prev = $o.prev();
@@ -1000,7 +923,7 @@
                 $prev.val(0);
             }
         }
-        
+
         function toNumberEV(o) {
             var $o = $(o);
             if ($o.val() == "最小") {
@@ -1024,8 +947,12 @@
                 $o.val("最小");
             }
         }
-        
+
         function exportPS() {
+            if (typeof pk_species === 'undefined') {
+                showPopover($("#exportPS"), "数据未加载，请检查脚本文件");
+                return;
+            }
             var text = "";
             var species = $("#species").val();
             if ($("#species1").prop('checked')) { text += "Egg("; }
@@ -1049,16 +976,16 @@
                 text += "Level: " + level + "\n";
             }
             var chu = $("#chu").val();
-            if (chu != null && chu ) {
-            text += "OT: " + chu + "\n";
+            if (chu) {
+                text += "OT: " + chu + "\n";
             }
             var biao = $("#biao").val();
-            if (biao != null && biao) {
-                text += ".DisplayTID= " + biao + "\n";
+            if (biao) {
+                text += ".DisplayTID=" + biao + "\n";
             }
             var li = $("#li").val();
-            if (li != null && biao) {
-                text += ".DisplaySID= " + li + "\n";
+            if (li) {
+                text += ".DisplaySID=" + li + "\n";
             }
             if ($("#isShiny").prop('checked')) {
                 text += "Shiny: Yes\n";
@@ -1081,40 +1008,32 @@
             if ($("#Gigantamax").prop('checked')) {
                 text += "Gigantamax: Yes\n";
             }
-            if ($("#power").prop('checked')) {
-                text += ".RibbonMarkMightiest=True\n";
+            var ppUps1 = $("#ppUps1").val();
+            if (ppUps1 > 0) {
+                text += ".Move1_PPUps=" + ppUps1 + "\n";
             }
-            if ($("#Friend").prop('checked')) {
-                text += ".OT_Friendship=255\n";
+            var ppUps2 = $("#ppUps2").val();
+            if (ppUps2 > 0) {
+                text += ".Move2_PPUps=" + ppUps2 + "\n";
             }
-            if ($("#Movesup").prop('checked')) {
-                text += ".Move1_PPUps=3\n.Move2_PPUps=3\n.Move3_PPUps=3\n.Move4_PPUps=3\n";
+            var ppUps3 = $("#ppUps3").val();
+            if (ppUps3 > 0) {
+                text += ".Move3_PPUps=" + ppUps3 + "\n";
             }
-            if ($("#Movesmax").prop('checked')) {
-                text += ".Moves=$suggest\n";
-            }
-            if ($("#Movesup1").prop('checked')) {
-                text += ".Move1_PPUps=3\n";
-            }
-            if ($("#Movesup2").prop('checked')) {
-                text += ".Move2_PPUps=3\n";
-            }
-            if ($("#Movesup3").prop('checked')) {
-                text += ".Move3_PPUps=3\n";
-            }
-            if ($("#Movesup4").prop('checked')) {
-                text += ".Move4_PPUps=3\n";
+            var ppUps4 = $("#ppUps4").val();
+            if (ppUps4 > 0) {
+                text += ".Move4_PPUps=" + ppUps4 + "\n";
             }
             var ball = $("#ball").val();
             if (ball != "None") {
                 text += "Ball: " + ball + "\n";
             }
-var ribbons = $("#ribbons").val();
-if (ribbons && ribbons.length > 0) {
-    text += ribbons.map(function(r) { 
-        return ".RibbonMark" + r.replace("RibbonMark", "");
-    }).join('\n') + '\n';
-}
+            var ribbons = $("#ribbons").val();
+            if (ribbons && ribbons.length > 0 && ribbons[0] !== 'None') {
+                text += ribbons.map(function(r) { 
+                    return ".RibbonMark" + r.replace("=True", "");
+                }).join('\n') + '\n';
+            }
             var ability = $("#ability").val();
             text += "Ability: " + ability + "\n";
             var nature = $("#nature").val();
@@ -1137,13 +1056,11 @@ if (ribbons && ribbons.length > 0) {
                 + (ivs[5].value == "" ? 0 : ivs[5].value) + " Spe \n";
 
             var teraType = $("#teraType").val();
-            if (teraType != "None")
+            if (teraType != "None") {
                 text += "Tera Type: " + teraType + "\n";
+            }
             var language = $("#language").val();
             text += "Language: " + language + "\n";
-            var scale = $("#scale").val();
-            if (scale != "" && scale >= 0 && scale <= 255) {
-                text += ".Scale=" + scale + "\n";
 
             var metDay = $("#metDay").val();
             var metMonth = $("#metMonth").val();
@@ -1152,6 +1069,11 @@ if (ribbons && ribbons.length > 0) {
                 text += ".MetDay=" + metDay + "\n";
                 text += ".MetMonth=" + metMonth + "\n";
                 text += ".MetYear=" + metYear + "\n";
+            }
+
+            var scale = $("#scale").val();
+            if (scale != "" && scale >= 0 && scale <= 255) {
+                text += ".Scale=" + scale + "\n";
             }
 
             var move1 = $("#move1").val();
@@ -1176,9 +1098,13 @@ if (ribbons && ribbons.length > 0) {
             setTimeout(function(){$("#exportPS").popover("hide");}, 2000);
             console.log(text);
         }
-        
+
         var psnum = 0;
         function batchPS() {
+            if (typeof pk_species === 'undefined') {
+                showPopover($("#batchPS"), "数据未加载，请检查脚本文件");
+                return;
+            }
             psnum++;
             var text = "";
             var species = $("#species").val();
@@ -1203,16 +1129,16 @@ if (ribbons && ribbons.length > 0) {
                 text += "Level: " + level + "\n";
             }
             var chu = $("#chu").val();
-            if (chu != null && chu ) {
-            text += "OT: " + chu + "\n";
+            if (chu) {
+                text += "OT: " + chu + "\n";
             }
             var biao = $("#biao").val();
-            if (biao != null && biao) {
-                text += ".DisplayTID= " + biao + "\n";
+            if (biao) {
+                text += ".DisplayTID=" + biao + "\n";
             }
             var li = $("#li").val();
-            if (li != null && biao) {
-                text += ".DisplaySID= " + li + "\n";
+            if (li) {
+                text += ".DisplaySID=" + li + "\n";
             }
             if ($("#isShiny").prop('checked')) {
                 text += "Shiny: Yes\n";
@@ -1235,37 +1161,32 @@ if (ribbons && ribbons.length > 0) {
             if ($("#Gigantamax").prop('checked')) {
                 text += "Gigantamax: Yes\n";
             }
-            if ($("#Friend").prop('checked')) {
-                text += ".OT_Friendship=255\n";
+            var ppUps1 = $("#ppUps1").val();
+            if (ppUps1 > 0) {
+                text += ".Move1_PPUps=" + ppUps1 + "\n";
             }
-            if ($("#Movesmax").prop('checked')) {
-                text += ".Moves=$suggest\n";
+            var ppUps2 = $("#ppUps2").val();
+            if (ppUps2 > 0) {
+                text += ".Move2_PPUps=" + ppUps2 + "\n";
             }
-            if ($("#Movesup").prop('checked')) {
-                text += ".Move1_PPUps=3\n.Move2_PPUps=3\n.Move3_PPUps=3\n.Move4_PPUps=3\n";
+            var ppUps3 = $("#ppUps3").val();
+            if (ppUps3 > 0) {
+                text += ".Move3_PPUps=" + ppUps3 + "\n";
             }
-            if ($("#Movesup1").prop('checked')) {
-                text += ".Move1_PPUps=3\n";
-            }
-            if ($("#Movesup2").prop('checked')) {
-                text += ".Move2_PPUps=3\n";
-            }
-            if ($("#Movesup3").prop('checked')) {
-                text += ".Move3_PPUps=3\n";
-            }
-            if ($("#Movesup4").prop('checked')) {
-                text += ".Move4_PPUps=3\n";
+            var ppUps4 = $("#ppUps4").val();
+            if (ppUps4 > 0) {
+                text += ".Move4_PPUps=" + ppUps4 + "\n";
             }
             var ball = $("#ball").val();
             if (ball != "None") {
                 text += "Ball: " + ball + "\n";
             }
-var ribbons = $("#ribbons").val();
-if (ribbons && ribbons.length > 0) {
-    text += ribbons.map(function(r) { 
-        return ".RibbonMark" + r.replace("RibbonMark", "");
-    }).join('\n') + '\n';
-}
+            var ribbons = $("#ribbons").val();
+            if (ribbons && ribbons.length > 0 && ribbons[0] !== 'None') {
+                text += ribbons.map(function(r) { 
+                    return ".RibbonMark" + r.replace("=True", "");
+                }).join('\n') + '\n';
+            }
             var ability = $("#ability").val();
             text += "Ability: " + ability + "\n";
             var nature = $("#nature").val();
@@ -1288,21 +1209,24 @@ if (ribbons && ribbons.length > 0) {
                 + (ivs[5].value == "" ? 0 : ivs[5].value) + " Spe \n<br>";
 
             var teraType = $("#teraType").val();
-            if (teraType != "None")
+            if (teraType != "None") {
                 text += "Tera Type: " + teraType + "\n<br>";
+            }
             var language = $("#language").val();
             text += "Language: " + language + "\n<br>";
-            var scale = $("#scale").val();
-            if (scale != "" && scale >= 0 && scale <= 255) {
-                text += ".Scale=" + scale + "\n<br>";
 
             var metDay = $("#metDay").val();
             var metMonth = $("#metMonth").val();
             var metYear = $("#metYear").val();
             if (metDay != "" && metMonth != "" && metYear != "") {
-                text += ".MetDay=" + metDay + "\n";
-                text += ".MetMonth=" + metMonth + "\n";
-                text += ".MetYear=" + metYear + "\n";
+                text += ".MetDay=" + metDay + "\n<br>";
+                text += ".MetMonth=" + metMonth + "\n<br>";
+                text += ".MetYear=" + metYear + "\n<br>";
+            }
+
+            var scale = $("#scale").val();
+            if (scale != "" && scale >= 0 && scale <= 255) {
+                text += ".Scale=" + scale + "\n<br>";
             }
 
             var move1 = $("#move1").val();
@@ -1329,7 +1253,7 @@ if (ribbons && ribbons.length > 0) {
             document.getElementById("psVariable").textContent = psnum;
             console.log(text);
         }
-        
+
         function exportbatchPS() {
             var ps = "";
             $(".table h5").each(function () {
@@ -1338,8 +1262,7 @@ if (ribbons && ribbons.length > 0) {
             
             if (psnum == 0) {
                 showPopover($(".btn.btn-infos"), "尚未添加宝可梦进入批量列表");
-            }
-            else {
+            } else {
                 ps = ps.substring(0, ps.length-3);
                 new ClipboardJS(".btn.btn-infos");
                 $(".btn.btn-infos").attr("data-clipboard-text", ps);
@@ -1347,24 +1270,22 @@ if (ribbons && ribbons.length > 0) {
                 console.log(ps);
             }
         }
-        
+
         function clearbatchPS() {
             if (psnum == 0) {
                 showPopover($(".btn.btn-infos2"), "尚未添加宝可梦进入批量列表");
-            }
-            else {
+            } else {
                 psnum = 0;
                 document.getElementById("psVariable").textContent = psnum;
                 showPopover($(".btn.btn-infos2"), "已全部清除");
                 $(".table h5").empty();
             }
         }
-        
+
         function clearfinalPS() {
             if (psnum == 0) {
                 showPopover($(".btn.btn-infos3"), "尚未添加宝可梦进入批量列表");
-            }
-            else {
+            } else {
                 var h5Elements = document.querySelectorAll('#batch .table h5');
                 if (h5Elements.length > 0) {
                     h5Elements[h5Elements.length - 1].remove();
@@ -1374,18 +1295,16 @@ if (ribbons && ribbons.length > 0) {
                 }
             }
         }
-        
+
         function showPopover(target, msg) {
             target.attr("data-original-title", msg);
-            $('[data-toggle="tooltip"]').tooltip();
-            target.tooltip('show');
+            $('[data-toggle="popover"]').popover();
+            target.popover('show');
             target.focus();
-            var id = setTimeout(
-                function () {
-                    target.attr("data-original-title", "");
-                    target.tooltip('hide');
-                }, 2000
-            );
+            setTimeout(function () {
+                target.attr("data-original-title", "");
+                target.popover('hide');
+            }, 2000);
         }
     </script>
 </body>
