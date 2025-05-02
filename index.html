@@ -466,6 +466,22 @@
                                 </td>
                             </tr>
                             <tr>
+                            <td>捕获日期</td>
+                            <td>
+                                <div class="form-group">
+                                    <div style="display: flex; gap: 10px;">
+                                        <input type="number" class="form-control" id="metDay" placeholder="日 1-31"
+                                            onchange="checkNum(this, 1, 31, 1)" style="width: 6em;">
+                                        <input type="number" class="form-control" id="metMonth" placeholder="月 1-12"
+                                            onchange="checkNum(this, 1, 12, 1)" style="width: 6em;">
+                                        <input type="number" class="form-control" id="metYear" placeholder="年 0-99"
+                                            onchange="checkNum(this, 0, 99, 23)" style="width: 6em;">
+                                    </div>
+                                    <small style="color: #888;">格式：日(1-31) 月(1-12) 年(0-99代表2000-2099)</small>
+                                </div>
+                            </td>
+                            </tr>
+                            <tr>
                                 <td>体型</td>
                                 <td>
                                     <div class="form-group">
@@ -1128,6 +1144,14 @@ if (ribbons && ribbons.length > 0) {
             var scale = $("#scale").val();
             if (scale != "" && scale >= 0 && scale <= 255) {
                 text += ".Scale=" + scale + "\n";
+
+            var metDay = $("#metDay").val();
+            var metMonth = $("#metMonth").val();
+            var metYear = $("#metYear").val();
+            if (metDay != "" && metMonth != "" && metYear != "") {
+                text += ".MetDay=" + metDay + "\n";
+                text += ".MetMonth=" + metMonth + "\n";
+                text += ".MetYear=" + metYear + "\n";
             }
 
             var move1 = $("#move1").val();
@@ -1271,6 +1295,14 @@ if (ribbons && ribbons.length > 0) {
             var scale = $("#scale").val();
             if (scale != "" && scale >= 0 && scale <= 255) {
                 text += ".Scale=" + scale + "\n<br>";
+
+            var metDay = $("#metDay").val();
+            var metMonth = $("#metMonth").val();
+            var metYear = $("#metYear").val();
+            if (metDay != "" && metMonth != "" && metYear != "") {
+                text += ".MetDay=" + metDay + "\n";
+                text += ".MetMonth=" + metMonth + "\n";
+                text += ".MetYear=" + metYear + "\n";
             }
 
             var move1 = $("#move1").val();
