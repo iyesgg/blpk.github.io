@@ -443,22 +443,38 @@
                                 </select>
                             </td>
                         </tr>
-                        <tr>
-                            <td>捕获日期</td>
-                            <td>
-                                <div class="form-group">
-                                    <div style="display: flex; gap: 10px;">
-                                        <input type="number" class="form-control" id="metDay" placeholder="日 1-31"
-                                            onchange="checkNum(this, 1, 31, 1)" style="width: 6em;">
-                                        <input type="number" class="form-control" id="metMonth" placeholder="月 1-12"
-                                            onchange="checkNum(this, 1, 12, 1)" style="width: 6em;">
-                                        <input type="number" class="form-control" id="metYear" placeholder="年 0-99"
-                                            onchange="checkNum(this, 0, 99, 23)" style="width: 6em;">
-                                    </div>
-                                    <small style="color: #888;">格式：日(1-31) 月(1-12) 年(0-99代表2000-2099)</small>
-                                </div>
-                            </td>
-                        </tr>
+<tr>
+    <td>捕获日期</td>
+    <td>
+        <div class="form-group">
+            <div style="display: flex; gap: 10px;">
+                <input type="number" class="form-control" id="metDay" placeholder="日 1-31"
+                    onchange="checkNum(this, 1, 31, 1)" style="width: 6em;">
+                <input type="number" class="form-control" id="metMonth" placeholder="月 1-12"
+                    onchange="checkNum(this, 1, 12, 1)" style="width: 6em;">
+                <input type="number" class="form-control" id="metYear" placeholder="年 0-99"
+                    onchange="checkNum(this, 0, 99, 23)" style="width: 6em;">
+            </div>
+            <small style="color: #888;">格式：日(1-31) 月(1-12) 年(0-99代表2000-2099)</small>
+        </div>
+    </td>
+</tr>
+<tr>
+    <td>孵化日期</td>
+    <td>
+        <div class="form-group">
+            <div style="display: flex; gap: 10px;">
+                <input type="number" class="form-control" id="eggDay" placeholder="日 1-31"
+                    onchange="checkNum(this, 1, 31, 1)" style="width: 6em;">
+                <input type="number" class="form-control" id="eggMonth" placeholder="月 1-12"
+                    onchange="checkNum(this, 1, 12, 1)" style="width: 6em;">
+                <input type="number" class="form-control" id="eggYear" placeholder="年 0-99"
+                    onchange="checkNum(this, 0, 99, 23)" style="width: 6em;">
+            </div>
+            <small style="color: #888;">格式：日(1-31) 月(1-12) 年(0-99代表2000-2099)</small>
+        </div>
+    </td>
+</tr>
                         <tr>
                             <td>体型</td>
                             <td>
@@ -1062,14 +1078,24 @@
             var language = $("#language").val();
             text += "Language: " + language + "\n";
 
-            var metDay = $("#metDay").val();
-            var metMonth = $("#metMonth").val();
-            var metYear = $("#metYear").val();
-            if (metDay != "" && metMonth != "" && metYear != "") {
-                text += ".MetDay=" + metDay + "\n";
-                text += ".MetMonth=" + metMonth + "\n";
-                text += ".MetYear=" + metYear + "\n";
-            }
+var metDay = $("#metDay").val();
+var metMonth = $("#metMonth").val();
+var metYear = $("#metYear").val();
+var eggDay = $("#eggDay").val();
+var eggMonth = $("#eggMonth").val();
+var eggYear = $("#eggYear").val();
+
+if (metDay != "" && metMonth != "" && metYear != "") {
+    text += ".MetDay=" + metDay + "\n";
+    text += ".MetMonth=" + metMonth + "\n";
+    text += ".MetYear=" + metYear + "\n";
+}
+
+if (eggDay != "" && eggMonth != "" && eggYear != "") {
+    text += ".EggDay=" + eggDay + "\n";
+    text += ".EggMonth=" + eggMonth + "\n";
+    text += ".EggYear=" + eggYear + "\n";
+}
 
             var scale = $("#scale").val();
             if (scale != "" && scale >= 0 && scale <= 255) {
@@ -1215,14 +1241,24 @@
             var language = $("#language").val();
             text += "Language: " + language + "\n<br>";
 
-            var metDay = $("#metDay").val();
-            var metMonth = $("#metMonth").val();
-            var metYear = $("#metYear").val();
-            if (metDay != "" && metMonth != "" && metYear != "") {
-                text += ".MetDay=" + metDay + "\n<br>";
-                text += ".MetMonth=" + metMonth + "\n<br>";
-                text += ".MetYear=" + metYear + "\n<br>";
-            }
+var metDay = $("#metDay").val();
+var metMonth = $("#metMonth").val();
+var metYear = $("#metYear").val();
+var eggDay = $("#eggDay").val();
+var eggMonth = $("#eggMonth").val();
+var eggYear = $("#eggYear").val();
+
+if (metDay != "" && metMonth != "" && metYear != "") {
+    text += ".MetDay=" + metDay + "\n";
+    text += ".MetMonth=" + metMonth + "\n";
+    text += ".MetYear=" + metYear + "\n";
+}
+
+if (eggDay != "" && eggMonth != "" && eggYear != "") {
+    text += ".EggDay=" + eggDay + "\n";
+    text += ".EggMonth=" + eggMonth + "\n";
+    text += ".EggYear=" + eggYear + "\n";
+}
 
             var scale = $("#scale").val();
             if (scale != "" && scale >= 0 && scale <= 255) {
