@@ -1044,12 +1044,12 @@
             if (ball != "None") {
                 text += "Ball: " + ball + "\n";
             }
-            var ribbons = $("#ribbons").val();
-            if (ribbons && ribbons.length > 0 && ribbons[0] !== 'None') {
-                text += ribbons.map(function(r) { 
-                    return ".RibbonMark" + r.replace("=True", "");
-                }).join('\n') + '\n';
-            }
+var ribbons = $("#ribbons").val();
+if (ribbons && ribbons.length > 0 && ribbons[0] !== 'None') {
+    text += ribbons.map(function(r) { 
+        return ".RibbonMark" + r; // 直接拼接 r 的值，不再移除 =True
+    }).join('\n') + '\n';
+}
             var ability = $("#ability").val();
             text += "Ability: " + ability + "\n";
             var nature = $("#nature").val();
@@ -1207,12 +1207,12 @@ if (eggDay != "" && eggMonth != "" && eggYear != "") {
             if (ball != "None") {
                 text += "Ball: " + ball + "\n";
             }
-            var ribbons = $("#ribbons").val();
-            if (ribbons && ribbons.length > 0 && ribbons[0] !== 'None') {
-                text += ribbons.map(function(r) { 
-                    return ".RibbonMark" + r.replace("=True", "");
-                }).join('\n') + '\n';
-            }
+var ribbons = $("#ribbons").val();
+if (ribbons && ribbons.length > 0 && ribbons[0] !== 'None') {
+    text += ribbons.map(function(r) { 
+        return ".RibbonMark" + r; // 直接拼接 r 的值，不再移除 =True
+    }).join('\n') + '\n';
+}
             var ability = $("#ability").val();
             text += "Ability: " + ability + "\n";
             var nature = $("#nature").val();
